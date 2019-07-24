@@ -1,0 +1,6 @@
+
+/* https://stackoverflow.com/questions/10245279/wrapping-html-table-rows-in-a-tags
+*/
+td > a {
+  display: block;
+}
