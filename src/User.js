@@ -4,6 +4,7 @@ import * as dp from './display_helpers';
 import * as api from './api_helpers';
 import RMTable from './RMTable';
 import { RM_COLS } from './constants';
+import PolCounts from './PolCounts';
 
 class User extends React.Component {
   constructor(props) {
@@ -49,7 +50,8 @@ class User extends React.Component {
         <li>{act.closes} closes</li>
         <li>{act.votes} comments/!votes</li>
       </ul>
-      <p>Their most cited policies are: TODO</p>
+      <p>Their most cited policies are:</p>
+      <PolCounts counts={this.state.polcounts} />
       <h2>Recent RMs</h2>
       <RMTable extra_headings={[RM_COLS.vote]} rowdat={this.state.rows} />
     </section>

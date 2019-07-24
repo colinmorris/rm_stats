@@ -25,6 +25,7 @@ the sorting/filtering without having to reload all the other data on the page)
   - normalize case
   - maybe linkify page names?
   - remove [[link]] markup
+- color-code !Vote column in user view to show close/nom?
 
 == CSS ==
 - general table formatting stuff
@@ -71,3 +72,5 @@ Other:
   - all votes cast
   - all policies cited 
   - all involved pages, in case of a multimove
+- turn the activity stats (noms/closes/comments) in user view into a little bar graph
+  - and maybe some kind of viz for polcounts too

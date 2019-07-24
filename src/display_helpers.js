@@ -17,3 +17,11 @@ export function render_user_wikilink(user) {
 export function render_user(user) {
   return <Link to={'/users/'+urlencode_user(user)}>{user}</Link>;
 }
+
+export function render_pol_wikilink(pol) {
+  const url = 'https://en.wikipedia.org/wiki/' + pol;
+  return <a href={url}>{pol}</a>;
+}
+export function render_pol_link(pol) {
+  return <Link to={'/policies/'+pol}>{pol}</Link>;
+}
