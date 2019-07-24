@@ -3,6 +3,19 @@
 - navigation (links at top?)
 - figure out what to do with rows having major parsing errors (no fromto)
   - probably don't show them, unless in some kind of debugging/development mode
+- maybe merge the RMs and RM search views?
+- return more semantic error codes for certain error conditions in backend
+  - e.g. 404 if we get a user lookup for a username that's not in the db?
+
+API design to support user view. Would like to have following information:
+- n each of noms/closes/votes
+- polcounts
+- selection of involved RMs (sorted by recency)
+    - and possibly filterable to just noms/closes/votes
+So, do we want to bundle all of that into one API call? Or split it out?
+Seems like at least the last one should be separate (so we can fetch more rows, or change
+the sorting/filtering without having to reload all the other data on the page)
+
 
 == Column display stuff ==
 - niceify date display
@@ -21,11 +34,11 @@
 
 == Views ==
 RMs:
-- big RMs / recent RMs
+x big RMs / recent RMs
 - user lookup
   - !vote
-- RM search
-- (done) policy lookup
+x RM search
+x policy lookup
   - n mentions
 Columns for all:
 * RM
@@ -43,7 +56,7 @@ Optional columns for all?:
 Users:
 - top users
 Policies:
-- top policies
+x top policies
   - also maybe this could be a subview of the user lookup view?!
 Other:
 - 'home'

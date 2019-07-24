@@ -7,6 +7,8 @@ import Policy from './Policy';
 import Policies from './Policies';
 import RMs from './RMs';
 import RMSearch from './RMSearch';
+import Users from './Users';
+import User from './User';
 
 class NavHeader extends React.Component {
 
@@ -15,6 +17,7 @@ class NavHeader extends React.Component {
       <nav>
         <ul>
           <li><Link to="/rms">RMs</Link></li>
+          <li><Link to="/users">Users</Link></li>
           <li>
             <Link to="/policies">Policies</Link>
           </li>
@@ -34,6 +37,8 @@ function App() {
         <Route exact path="/policies" component={Policies} />
         <Route exact path="/rms" component={RMs} />
         <Route path="/rms/search" component={RMSearch} />
+        <Route exact path="/users" component={Users} />
+        <Route path="/users/:username" component={User} />
       </div>
     </Router>
   );

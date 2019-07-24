@@ -45,3 +45,16 @@ export function search_rms(query, n, case_sensitive) {
   const qargs = {n: n, query: query, case:case_sensitive};
   return api('rms/search', qargs);
 }
+
+export function top_users(sortKey, n) {
+  const qargs = {sort: sortKey, n: n};
+  return api('users/top', qargs);
+}
+
+export function user_stats(user) {
+  return api('user/stats', {user: user});
+}
+
+export function user_rms(user) {
+  return api('user/rms', {user: user});
+}

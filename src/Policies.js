@@ -1,15 +1,24 @@
 import React from 'react';
 
-import BaseTable from './BaseTable';
+import TableWrapper from './BaseTable';
 import PolRow from './PolRow';
 
-class Policies extends BaseTable {
+class Policies extends React.Component {
   headings = ['Policy', 'Mentions'];
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      rows: [],
+    };
+    this.n = 30;
+  }
+
   componentDidMount() {
+    // XXX: This could be simplified using api_helpers
     var urlstr = window.location.origin + '/api/policies';
     var url = new URL(urlstr);
-    var params = {n: this.state.n};
+    var params = {n: this.n};
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     var prom = window.fetch(url, {headers:{
@@ -27,6 +36,15 @@ class Policies extends BaseTable {
   }
   renderRow(row) {
     return <PolRow key={row.pol} {...row} />;
+  }
+
+  render() {
+    const row_eles = this.state.rows.map(this.renderRow);
+    return (
+      <TableWrapper headings={this.headings}>
+        {row_eles}
+      </TableWrapper>
+    );
   }
 }
 

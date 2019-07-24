@@ -32,6 +32,9 @@ class RMRow extends React.Component {
       case RM_COLS.mentions:
         meat = dat.n_mentions;
         break;
+      case RM_COLS.vote:
+        meat = `role: ${dat.role} / ${dat.vote}`;
+        break;
       default:
         console.error("Unrecognized RM table heading: "+col);
     }
@@ -42,50 +45,6 @@ class RMRow extends React.Component {
     var cells = this.props.headings.map(heading => {
         return <td key={heading}>{this.renderCol(heading)}</td>});
     return <tr>{cells}</tr>;
-  }
-  
-  __render() {
-    return (
-      <tr>
-        <td><a href={this.rm_link}>
-          {this.props.from_title} {RARROW} {this.props.to_title} 
-        </a></td>
-
-        <td>
-          {this.props.close_date}
-        </td>
-
-        <td>
-          {this.props.polcounts}
-        </td>
-      </tr>
-      );
-  }
-
-  _render() {
-    return (
-      <tr>
-        <td><a href={this.rm_link}>
-          {this.props.from_title}  
-        </a></td>
-        
-        <td><a href={this.rm_link}>
-          {RARROW}
-        </a></td>
-
-        <td><a href={this.rm_link}>
-          {this.props.to_title}
-        </a></td>
-
-        <td>
-          {this.props.close_date}
-        </td>
-
-        <td>
-          {this.props.polcounts}
-        </td>
-      </tr>
-      );
   }
 
 }
