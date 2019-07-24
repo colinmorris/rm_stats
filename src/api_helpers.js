@@ -1,14 +1,12 @@
 
 export function build_url(base, querystring_params) {
   // transform boolean values to 0/1
-  console.log('qp=', querystring_params);
   const qparams = Object.fromEntries(
       Object.entries(querystring_params).map( ent => {
         let k = ent[0], v = ent[1];
         return [k, ((typeof(v)==='boolean') ? (v ? '1' : '0') : v)];
       })
     );
-  console.log(qparams);
   var usp = new URLSearchParams(qparams);
   var qs = usp.toString();
   return base + (qs && '?') + qs;
@@ -19,7 +17,6 @@ function api(endpoint, qargs) {
     endpoint = '/' + endpoint;
   }
   var urlstr = window.location.origin + '/api' + endpoint;
-  //console.log(urlstr);
   const url = build_url(urlstr, qargs);
   var prom = window.fetch(url, {headers:{
       Accept: 'application/json'}})

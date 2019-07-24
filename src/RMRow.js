@@ -19,8 +19,11 @@ class RMRow extends React.Component {
         meat = (<a href={this.rm_link}>
             {dat.from_title} {RARROW} {dat.to_title}</a>);
         break;
-      case RM_COLS.Date:
+      case RM_COLS.date:
         meat = dat.close_date;
+        break;
+      case RM_COLS.outcome:
+        meat = dat.outcome;
         break;
       default:
         console.error("Unrecognized RM table heading: "+col);
@@ -29,8 +32,8 @@ class RMRow extends React.Component {
   }
 
   render() {
-    var cells = this.props.headings.map(heading => 
-        <td key={heading}>{this.renderCol(heading)}</td>);
+    var cells = this.props.headings.map(heading => {
+        return <td key={heading}>{this.renderCol(heading)}</td>});
     return <tr>{cells}</tr>;
   }
   

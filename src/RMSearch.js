@@ -22,9 +22,6 @@ class RMSearch extends React.Component {
 
   get query() {
     return this.qStringParams.get('q');
-    let params = new URLSearchParams(this.props.location.search);
-    //return this.props.location.query.q;
-    return params.get('q');
   }
 
   get case_sensitive() {

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import RMTable from './RMTable';
-import RMRow from './RMRow';
 import * as api from './api_helpers';
 
 class Policy extends React.Component {

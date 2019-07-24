@@ -17,7 +17,7 @@ import { RM_COLS } from './constants';
   - outcome
 **/
 class RMTable extends React.Component {
-  base_headings = [RM_COLS.RM, RM_COLS.Date];
+  base_headings = [RM_COLS.RM, RM_COLS.date, RM_COLS.outcome];
   static defaultProps = {
     extra_headings: [],
   };
