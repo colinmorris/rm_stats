@@ -14,15 +14,11 @@ class RMSearchBar extends React.Component {
     evt.preventDefault();
     const query = document.getElementById("searchField").value;
     const cs = document.getElementById("caseSensitiveBox").checked;
-    console.log('cs=', cs);
-    // XXX TODO: sanitize query string
-    //var loc = '/rms/search?q=' + query;
     const qargs = {q: query};
     if (cs === true) {
       qargs.case = '1';
     }
     var loc = build_url('/rms/search', qargs);
-    console.log('Moving to ' + loc);
     this.props.history.push(loc);
   }
 

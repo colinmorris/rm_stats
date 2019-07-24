@@ -13,7 +13,6 @@ class RMSearch extends React.Component {
       rows: [],
     };
     this.n = 30;
-    console.log(this.props);
   }
 
   get qStringParams() {

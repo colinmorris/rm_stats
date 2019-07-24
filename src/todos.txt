@@ -8,6 +8,10 @@
 - niceify date display
 - replace None with ? for to_title
 - add "(and x more)" to RM col for multimoves
+- clean up outcome col
+  - normalize case
+  - maybe linkify page names?
+  - remove [[link]] markup
 
 == CSS ==
 - general table formatting stuff
@@ -33,6 +37,7 @@ Optional columns for all?:
 * all size cols (participants, comments, bytes)
 * nominator
 * closer
+* n_relists
 
 
 Users:
@@ -47,3 +52,9 @@ Other:
 == Backend ==
 - filter/sort kwargs
 - sqlite backend?
+
+== Wild ideas ==
+- have pages for individual RMs? Would give space to show more detailed stats, esp:
+  - all votes cast
+  - all policies cited 
+  - all involved pages, in case of a multimove

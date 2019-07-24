@@ -2,6 +2,7 @@ import React from 'react';
 
 import RMTable from './RMTable';
 import * as api from './api_helpers';
+import { RM_COLS } from './constants';
 
 class Policy extends React.Component {
 
@@ -28,7 +29,7 @@ class Policy extends React.Component {
     return (
       <section>
       <h1>RM discussions invoking {this.polname}</h1>
-      <RMTable extra_headings={['Mentions']} rowdat={this.state.rows} />
+      <RMTable extra_headings={[RM_COLS.mentions]} rowdat={this.state.rows} />
       </section>
       );
   }

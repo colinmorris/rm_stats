@@ -5,6 +5,6 @@ export const RM_COLS = {
   outcome: 'Outcome',
   mentions: 'Mentions', // n mentions of a specific policy
   vote: '!Vote',
-  size: 'Size',
+  size: 'Participants',
 };
 

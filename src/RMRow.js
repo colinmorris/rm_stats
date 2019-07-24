@@ -25,6 +25,13 @@ class RMRow extends React.Component {
       case RM_COLS.outcome:
         meat = dat.outcome;
         break;
+      case RM_COLS.size:
+        //meat = `${dat.n_participants-1} participants, ${dat.n_comments} comments`;
+        meat = dat.n_participants-1;
+        break;
+      case RM_COLS.mentions:
+        meat = dat.n_mentions;
+        break;
       default:
         console.error("Unrecognized RM table heading: "+col);
     }

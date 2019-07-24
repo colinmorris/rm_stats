@@ -8,7 +8,6 @@ class Policies extends BaseTable {
 
   componentDidMount() {
     var urlstr = window.location.origin + '/api/policies';
-    //console.log(urlstr);
     var url = new URL(urlstr);
     var params = {n: this.state.n};
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
@@ -27,7 +26,6 @@ class Policies extends BaseTable {
       });
   }
   renderRow(row) {
-    console.log(row);
     return <PolRow key={row.pol} {...row} />;
   }
 }
