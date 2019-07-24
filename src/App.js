@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
+import './main.css';
 //import './App.css';
 import Home from './Home';
 import Policy from './Policy';

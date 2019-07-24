@@ -2,6 +2,7 @@ import React from 'react';
 
 import RMRow from './RMRow';
 import { RM_COLS } from './constants';
+import TableWrapper from './BaseTable';
 
 /** Potential headings:
   - RM (fromto/link)
@@ -33,17 +34,11 @@ class RMTable extends React.Component {
   }
 
   render() {
-    const headercells = this.headings.map(label => 
-        <th key={label}>{label}</th>
-    );
     const trs = this.props.rowdat.map( (row) => this.renderRow(row));
     return (
-      <table>
-        <thead><tr>{headercells}</tr></thead>
-        <tbody>
-          {trs}
-        </tbody>
-      </table>
+      <TableWrapper headings={this.headings}>
+        {trs}
+      </TableWrapper>
       );
   }
 }

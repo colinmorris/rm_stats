@@ -8,7 +8,7 @@ const RARROW = '→';
 class RMRow extends React.Component {
 
   get rm_link() {
-    return 'https://en.wikipedia.org/wiki/' + this.props.rm_link;
+    return 'https://en.wikipedia.org/wiki/' + this.props.dat.rm_link;
   }
 
   renderCol(col) {
@@ -20,7 +20,7 @@ class RMRow extends React.Component {
             {dat.from_title} {RARROW} {dat.to_title}</a>);
         break;
       case RM_COLS.date:
-        meat = dat.close_date;
+        meat = dat.close_date.split(' ')[0];
         break;
       case RM_COLS.outcome:
         meat = dat.outcome;
@@ -35,6 +35,9 @@ class RMRow extends React.Component {
       case RM_COLS.vote:
         meat = `role: ${dat.role} / ${dat.vote}`;
         break;
+      case RM_COLS.comments:
+        meat = dat.n_comments;
+        break;
       default:
         console.error("Unrecognized RM table heading: "+col);
     }
@@ -43,7 +46,7 @@ class RMRow extends React.Component {
 
   render() {
     var cells = this.props.headings.map(heading => {
-        return <td key={heading}>{this.renderCol(heading)}</td>});
+        return <td key={heading} className={heading}>{this.renderCol(heading)}</td>});
     return <tr>{cells}</tr>;
   }
 

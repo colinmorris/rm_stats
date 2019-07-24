@@ -4,3 +4,8 @@
 td > a {
   display: block;
 }
+
+td.Participants {
+  text-align: center;
+}
+

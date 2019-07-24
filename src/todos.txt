@@ -6,6 +6,8 @@
 - maybe merge the RMs and RM search views?
 - return more semantic error codes for certain error conditions in backend
   - e.g. 404 if we get a user lookup for a username that's not in the db?
+- for a failed user lookup, show user lookup search bar
+- filtering controls for user view (closer/commenter/nominator)
 
 API design to support user view. Would like to have following information:
 - n each of noms/closes/votes
@@ -26,6 +28,8 @@ the sorting/filtering without having to reload all the other data on the page)
   - maybe linkify page names?
   - remove [[link]] markup
 - color-code !Vote column in user view to show close/nom?
+  - ooh, color code support/oppose !votes and moved/not moved cells
+    in matching color scheme, to easy see rough agreement/disagreement.
 
 == CSS ==
 - general table formatting stuff
@@ -36,7 +40,7 @@ the sorting/filtering without having to reload all the other data on the page)
 == Views ==
 RMs:
 x big RMs / recent RMs
-- user lookup
+x user lookup
   - !vote
 x RM search
 x policy lookup
@@ -55,7 +59,7 @@ Optional columns for all?:
 
 
 Users:
-- top users
+x top users
 Policies:
 x top policies
   - also maybe this could be a subview of the user lookup view?!

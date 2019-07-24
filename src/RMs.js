@@ -3,6 +3,7 @@ import React from 'react';
 import RMTable from './RMTable';
 import RMSearchBar from './RMSearchBar';
 import * as api from './api_helpers';
+import { RM_COLS } from './constants';
 
 class RMs extends React.Component {
 
@@ -49,7 +50,9 @@ class RMs extends React.Component {
           Big
         </label>
         <h2>{this.sortKey} RMs</h2>
-        <RMTable rowdat={this.state.rows} />
+        <RMTable rowdat={this.state.rows} 
+          extra_headings={this.sortKey === 'big' ? [RM_COLS.comments] : []}
+        />
       </section>
     );
   }

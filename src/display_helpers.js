@@ -14,8 +14,12 @@ export function render_user_wikilink(user) {
   return <a href={user_link}>{user}</a>;
 }
 
+export function user_link(user) {
+  return '/users/' + urlencode_user(user);
+}
+
 export function render_user(user) {
-  return <Link to={'/users/'+urlencode_user(user)}>{user}</Link>;
+  return <Link to={user_link(user)}>{user}</Link>;
 }
 
 export function render_pol_wikilink(pol) {

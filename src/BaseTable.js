@@ -4,7 +4,7 @@ class TableWrapper extends React.Component {
   
   render() {
     const headercells = this.props.headings.map( (label, i) => 
-        <th key={label}>{label}</th>
+        <th key={label} className={label}>{label}</th>
     );
     return (
       <table>

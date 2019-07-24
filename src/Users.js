@@ -15,6 +15,7 @@ class Users extends React.Component {
     this.sortKey = 'all';
     this.n = 30;
     this.handleSortChange = this.handleSortChange.bind(this);
+    this.doLookup = this.doLookup.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +30,13 @@ class Users extends React.Component {
   fetchRows() {
     api.top_users(this.sortKey, this.n)
       .then(dat => { this.setState({rows: dat}); });
+  }
+
+  doLookup(evt) {
+    evt.preventDefault();
+    const query = document.getElementById("userlookup").value;
+    var loc = disp.user_link(query)
+    this.props.history.push(loc);
   }
 
   renderRow(row) {
@@ -65,6 +73,13 @@ class Users extends React.Component {
     return (
     <section>
       <h1>Users</h1>
+      <form>
+        <label>
+          <input id="userlookup" type="search" />
+          User lookup
+        </label>
+        <button onClick={this.doLookup}>Search</button>
+      </form>
       <h2>Most active users</h2>
       <form>
         <p>Sort by...</p>
