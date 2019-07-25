@@ -12,7 +12,7 @@ class Policy extends RMTable {
   }
 
   rows_api_call() {
-    return api.fetch_rms_for_policy(this.polname, this.n);
+    return api.fetch_rms_for_policy(this.polname, this.state.n);
   }
 
   render() {

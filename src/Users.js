@@ -12,11 +12,13 @@ class Users extends APITableMixin {
     ['closes', 'Closes'],
     ['all', 'All'],
   ]);
-  defaultSortKey = 'all';
 
   constructor(props) {
     super(props);
     this.doLookup = this.doLookup.bind(this);
+  }
+  get defaultSortKey() {
+    return 'all';
   }
 
   rows_api_call() {

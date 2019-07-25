@@ -3,14 +3,16 @@ import React from 'react';
 import RMTable from './RMTable';
 import RMSearchBar from './RMSearchBar';
 import * as api from './api_helpers';
-import { RM_COLS, DEFAULT_RM_ROWS, RM_ROW_PLUS } from './constants';
+import { RM_COLS } from './constants';
 
 class RMs extends RMTable {
   sortKeys = new Map([
       ['big', 'Big'],
       ['recent', 'Recent'],
   ]);
-  defaultSortKey = 'recent';
+  get defaultSortKey() {
+    return 'recent';
+  }
 
   // Overriding RMTable implementation, which assumes a static list of 
   // extra_headings for the class.
@@ -31,7 +33,7 @@ class RMs extends RMTable {
       <>
         <h1>RMs</h1>
         <RMSearchBar />
-        <h2>{this.sortKey} RMs</h2>
+        <h2>{this.state.sortKey} RMs</h2>
         {this.renderTable()}
       </>
     );

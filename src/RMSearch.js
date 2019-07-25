@@ -42,7 +42,8 @@ class RMSearch extends RMTable {
 
   shouldRefetchRows(prevProps, prevState) {
     return (prevProps.location.search !== this.props.location.search
-        || super(prevProps, prevState);
+        || super.shouldRefetchRows(prevProps, prevState)
+    );
   }
 
   render() {

@@ -8,7 +8,7 @@ class Policies extends APITableMixin {
   headings = ['Policy', 'Mentions'];
 
   rows_api_call() {
-    return api.fetch_top_policies(this.n);
+    return api.fetch_top_policies(this.state.n);
   }
 
   renderRow(row) {

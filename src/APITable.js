@@ -19,7 +19,6 @@ class APITableMixin extends React.Component {
      to text to use as label.
   */
   sortKeys = new Map([]);
-  defaultSortKey = undefined;
   // If any of these state variables changes, our API results (this.state.rows)
   // are stale.
   apiSensitiveStateVars = ['n', 'sortKey'];
@@ -33,6 +32,12 @@ class APITableMixin extends React.Component {
     };
     this.onExpand = this.onExpand.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
+  }
+
+  // Need to implement as a getter rather than a class field so that subclass
+  // implementation is accessible from base class constructor.
+  get defaultSortKey() {
+    return undefined;
   }
 
   onExpand() {
@@ -55,7 +60,7 @@ class APITableMixin extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (shouldRefetchRows(prevProps, prevState)) {
+    if (this.shouldRefetchRows(prevProps, prevState)) {
       this.updateRowFetch();
     }
   }
@@ -71,11 +76,13 @@ class APITableMixin extends React.Component {
   }
 
   renderSortControls() {
-    if (this.state.sortKeys.size === 0) {
+    if (this.sortKeys.size === 0) {
       return;
     }
-    const radios = this.state.sortKeys.entries().map( (key, label) => (
-      <div className="form-check form-check-inline">
+    const radios = Array.from(this.sortKeys).map( kv => {
+      const key=kv[0], label=kv[1];
+      return (
+      <div key={key} className="form-check form-check-inline">
         <input className="form-check-input" type="radio"
           value={key} id={'sortradio-'+key}
           checked={this.state.sortKey===key}
@@ -85,7 +92,7 @@ class APITableMixin extends React.Component {
           {label}
         </label>
       </div>
-    ));
+    )});
 
     return (
       <form>{radios}</form>
