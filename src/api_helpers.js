@@ -58,3 +58,7 @@ export function user_stats(user) {
 export function user_rms(user) {
   return api('user/rms', {user: user});
 }
+
+export function fetch_top_policies(n) {
+  return api('policies', {n: n});
+}

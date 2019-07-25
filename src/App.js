@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import './main.css';
-//import './App.css';
 import Home from './Home';
 import Policy from './Policy';
 import Policies from './Policies';
@@ -32,7 +31,7 @@ function App() {
   return (
     <Router>
     <NavHeader />
-      <div>
+      <div className="main-content">
         <Route exact path="/" component={Home} />
         <Route path="/policies/:pol" component={Policy} />
         <Route exact path="/policies" component={Policies} />

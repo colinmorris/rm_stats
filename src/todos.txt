@@ -1,26 +1,14 @@
-- make tables expandable
-- filtering / sorting controls
-- navigation (links at top?)
+- don't show table expander button if we're not at limit
 - figure out what to do with rows having major parsing errors (no fromto)
   - probably don't show them, unless in some kind of debugging/development mode
 - maybe merge the RMs and RM search views?
 - return more semantic error codes for certain error conditions in backend
   - e.g. 404 if we get a user lookup for a username that's not in the db?
-- for a failed user lookup, show user lookup search bar
+  - for a failed user lookup, show user lookup search bar
 - filtering controls for user view (closer/commenter/nominator)
-
-API design to support user view. Would like to have following information:
-- n each of noms/closes/votes
-- polcounts
-- selection of involved RMs (sorted by recency)
-    - and possibly filterable to just noms/closes/votes
-So, do we want to bundle all of that into one API call? Or split it out?
-Seems like at least the last one should be separate (so we can fetch more rows, or change
-the sorting/filtering without having to reload all the other data on the page)
-
+- /About
 
 == Column display stuff ==
-- niceify date display
 - replace None with ? for to_title
 - add "(and x more)" to RM col for multimoves
 - clean up outcome col
@@ -30,12 +18,7 @@ the sorting/filtering without having to reload all the other data on the page)
 - color-code !Vote column in user view to show close/nom?
   - ooh, color code support/oppose !votes and moved/not moved cells
     in matching color scheme, to easy see rough agreement/disagreement.
-
-== CSS ==
-- general table formatting stuff
-  - visible borders?
-  - margin/padding btwn cols
-  - orientation/size of text. Allowing long text to flow over multiple lines.
+- in policies view, maybe have polname link to local subpage, and have some kind of ? icon that links to the external policy page? Or just a separate column - lots of horizontal space to spare.
 
 == Views ==
 RMs:
@@ -69,12 +52,14 @@ Other:
 
 == Backend ==
 - filter/sort kwargs
-- sqlite backend?
 
-== Wild ideas ==
+== Wild ideas / Nice-to-haves ==
 - have pages for individual RMs? Would give space to show more detailed stats, esp:
   - all votes cast
   - all policies cited 
   - all involved pages, in case of a multimove
 - turn the activity stats (noms/closes/comments) in user view into a little bar graph
   - and maybe some kind of viz for polcounts too
+- filtering by date range
+- sqlite backend
+- mimic Vector CSS

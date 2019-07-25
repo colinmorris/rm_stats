@@ -3,38 +3,23 @@ import React from 'react';
 import RMTable from './RMTable';
 import RMSearchBar from './RMSearchBar';
 import * as api from './api_helpers';
-import { RM_COLS } from './constants';
+import { RM_COLS, DEFAULT_RM_ROWS, RM_ROW_PLUS } from './constants';
 
-class RMs extends React.Component {
+class RMs extends RMTable {
+  sortKeys = new Map([
+      ['big', 'Big'],
+      ['recent', 'Recent'],
+  ]);
+  defaultSortKey = 'recent';
+  extra_headings = [];
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      rows: [],
-    };
-    this.sortKey = 'recent';
-    this.n = 30;
-  }
-
-  componentDidMount() {
-    this.fetchRows();
-  }
-
-  handleSortChange(evt) {
-    this.sortKey = evt.target.value;
-    this.fetchRows();
-  }
-
-  fetchRows() {
-    api.fetch_rms(this.sortKey, this.n)
-      .then(dat => {
-        this.setState({rows: dat});
-      });
+  updateRowFetch() {
+    return api.fetch_rms(this.sortKey, this.n);
   }
   
   render() {
     return (
-      <section>
+      <>
         <h1>RMs</h1>
         <RMSearchBar />
         <label>
@@ -52,8 +37,9 @@ class RMs extends React.Component {
         <h2>{this.sortKey} RMs</h2>
         <RMTable rowdat={this.state.rows} 
           extra_headings={this.sortKey === 'big' ? [RM_COLS.comments] : []}
+          onExpand={this.onExpand}
         />
-      </section>
+      </>
     );
   }
 }
