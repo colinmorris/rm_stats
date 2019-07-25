@@ -74,11 +74,8 @@ class Users extends React.Component {
     <section>
       <h1>Users</h1>
       <form>
-        <label>
           <input id="userlookup" type="search" />
-          User lookup
-        </label>
-        <button onClick={this.doLookup}>Search</button>
+        <button onClick={this.doLookup}>User lookup</button>
       </form>
       <h2>Most active users</h2>
       <form>

@@ -16,11 +16,11 @@ class NavHeader extends React.Component {
   render() {
     return (
       <nav>
-        <ul>
-          <li><Link to="/rms">RMs</Link></li>
-          <li><Link to="/users">Users</Link></li>
-          <li>
-            <Link to="/policies">Policies</Link>
+        <ul className="nav">
+          <li className="nav-item"><Link to="/rms" className="nav-link">RMs</Link></li>
+          <li className="nav-item"><Link to="/users" className="nav-link">Users</Link></li>
+          <li className="nav-item">
+            <Link to="/policies" className="nav-link">Policies</Link>
           </li>
         </ul>
       </nav>
