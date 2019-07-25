@@ -2,7 +2,7 @@ import React from 'react';
 
 import RMTable from './RMTable';
 import * as api from './api_helpers';
-import { RM_COLS, DEFAULT_RM_ROWS, RM_ROW_PLUS } from './constants';
+import { RM_COLS } from './constants';
 
 class Policy extends RMTable {
   extra_headings = [RM_COLS.mentions];

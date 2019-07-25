@@ -6,15 +6,21 @@ import RMTable from './RMTable';
 import { RM_COLS } from './constants';
 import PolCounts from './PolCounts';
 
+class UserRMsTable extends RMTable {
+  extra_headings = [RM_COLS.vote];
+
+  rows_api_call() {
+    return api.user_rms(this.props.username, this.state.n);
+  }
+}
+
 class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rows: [],
       activity: {},
       polcounts: {},
     };
-    this.n = 30;
   }
 
   get username() {
@@ -27,15 +33,8 @@ class User extends React.Component {
     });
   }
 
-  fetchRMs() {
-    api.user_rms(this.username).then(dat => {
-      this.setState({rows: dat});
-    });
-  }
-
   componentDidMount() {
     this.fetchStats();
-    this.fetchRMs();
   }
 
   render() {
@@ -53,7 +52,7 @@ class User extends React.Component {
       <p>Their most cited policies are:</p>
       <PolCounts counts={this.state.polcounts} />
       <h2>Recent RMs</h2>
-      <RMTable extra_headings={[RM_COLS.vote]} rowdat={this.state.rows} />
+      <UserRMsTable username={this.username} />
     </section>
       );
     // TODO: Maybe separate tables for vote/nom/close. And links to load the "as X" sections as separate pages?

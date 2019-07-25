@@ -11,10 +11,19 @@ class RMs extends RMTable {
       ['recent', 'Recent'],
   ]);
   defaultSortKey = 'recent';
-  extra_headings = [];
 
-  updateRowFetch() {
-    return api.fetch_rms(this.sortKey, this.n);
+  // Overriding RMTable implementation, which assumes a static list of 
+  // extra_headings for the class.
+  get headings() {
+    let hd = this.base_headings;
+    if (this.state.sortKey === 'big') {
+      hd = hd.concat( [RM_COLS.comments] );
+    }
+    return hd;
+  }
+
+  rows_api_call() {
+    return api.fetch_rms(this.state.sortKey, this.state.n);
   }
   
   render() {
@@ -22,23 +31,8 @@ class RMs extends RMTable {
       <>
         <h1>RMs</h1>
         <RMSearchBar />
-        <label>
-          <input type="radio" value="recent"
-            checked={this.sortKey==='recent'}
-            onChange={this.handleSortChange.bind(this)} />
-          Recent
-        </label>
-        <label>
-          <input type="radio" value="big"
-            checked={this.sortKey==='big'}
-            onChange={this.handleSortChange.bind(this)} />
-          Big
-        </label>
         <h2>{this.sortKey} RMs</h2>
-        <RMTable rowdat={this.state.rows} 
-          extra_headings={this.sortKey === 'big' ? [RM_COLS.comments] : []}
-          onExpand={this.onExpand}
-        />
+        {this.renderTable()}
       </>
     );
   }

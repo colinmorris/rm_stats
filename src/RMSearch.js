@@ -4,16 +4,18 @@ import RMSearchBar from './RMSearchBar';
 import RMTable from './RMTable';
 import * as api from './api_helpers';
 
-class RMSearch extends React.Component {
-  // this.props.location.query.foo
+/* A view showing RM search results and a search bar.
+   /rms/search?q=
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      rows: [],
-    };
-    this.n = 30;
-  }
+   The way this encodes some state in the query string (and sort of has some
+   weird upward flow of state, via RMSearchBar navigating to a new location,
+   thereby changing the props of its parent RMSearch), feels a little janky.
+   Wonder what the approved way to do this is.
+*/
+class RMSearch extends RMTable {
+  // nvm, keep case_sensitive as a pseudo (derived) property, and
+  // override shouldRefetchRows()
+  //apiSensitiveStateVars = ['n', 'sortKey', 'case_sensitive'];
 
   get qStringParams() {
     return new URLSearchParams(this.props.location.search);
@@ -27,25 +29,20 @@ class RMSearch extends React.Component {
     return this.qStringParams.get('case') === '1';
   }
 
-  fetch() {
+  // Overriding APITableMixin implementation
+  updateRowFetch() {
     if (!this.query) {
       this.setState({rows: []});
       return;
     }
-    api.search_rms(this.query, this.n, this.case_sensitive).then(dat => {
+    api.search_rms(this.query, this.state.n, this.case_sensitive).then(dat => {
       this.setState({rows: dat});
     });
   }
 
-  componentDidMount() {
-    this.fetch();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.location.search !== this.props.location.search) {
-      console.log("Detected change to query string. Fetching new results.");
-      this.fetch();
-    }
+  shouldRefetchRows(prevProps, prevState) {
+    return (prevProps.location.search !== this.props.location.search
+        || super(prevProps, prevState);
   }
 
   render() {
@@ -55,7 +52,7 @@ class RMSearch extends React.Component {
         <RMSearchBar query={this.query} 
           case_sensitive={this.case_sensitive}
         />
-        <RMTable rowdat={this.state.rows} />
+        {this.renderTable()}
       </section>
       );
   }
