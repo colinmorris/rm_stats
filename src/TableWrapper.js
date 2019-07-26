@@ -10,7 +10,7 @@ class TableWrapper extends React.Component {
     );
     return (
     <div className="table-container">
-      <table>
+      <table className="wikitable">
         <thead><tr>{headercells}</tr></thead>
         <tbody>
           {this.props.children}

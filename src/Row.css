@@ -5,7 +5,7 @@ td > a {
   display: block;
 }
 
-td.Participants {
+td.Participants, td.Date {
   text-align: center;
 }
 

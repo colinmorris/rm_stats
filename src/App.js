@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import './main.css';
+import './pseudo_vector.css';
 import Home from './Home';
 import Policy from './Policy';
 import Policies from './Policies';

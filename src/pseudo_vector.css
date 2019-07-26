@@ -1,0 +1,41 @@
+/* Vector just uses font-family: sans serif for most body text (except headings).
+I think I like leaving it up to the browser default though.
+*/
+a {
+  color: #0645ad;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #0645ad;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  margin: 0;
+  border-bottom: 1px solid #a2a9b1;
+}
+
+h1, h2 {
+  font-family: 'Linux Libertine','Georgia','Time',serif;
+  line-height: 1.3;
+  margin-bottom: 0.25em;
+  padding: 0;
+}
+
+table.wikitable {
+  background-color: #f8f9fa;
+  color: #222;
+  margin: 1em 0;
+  border: 1px solid #a2a9b1;
+  border-collapse: collapse;
+}
+
+table.wikitable > * > tr > th {
+  background-color: #eaecf0;
+  text-align: center;
+}
+table.wikitable th, table.wikitable td {
+  border: 1px solid #a2a9b1;
+  padding: 0.2em 0.4em;
+}
