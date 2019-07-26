@@ -1,12 +1,14 @@
-- don't show table expander button if we're not at limit
 - figure out what to do with rows having major parsing errors (no fromto)
   - probably don't show them, unless in some kind of debugging/development mode
+  - maybe add some 'advanced mode' controls for this and other things?
 - maybe merge the RMs and RM search views?
 - return more semantic error codes for certain error conditions in backend
   - e.g. 404 if we get a user lookup for a username that's not in the db?
   - for a failed user lookup, show user lookup search bar
 - filtering controls for user view (closer/commenter/nominator)
 - /About
+- figure out what to do with home url
+- gonna be a bug with random sort and show more
 
 == Column display stuff ==
 - replace None with ? for to_title
@@ -19,6 +21,22 @@
   - ooh, color code support/oppose !votes and moved/not moved cells
     in matching color scheme, to easy see rough agreement/disagreement.
 - in policies view, maybe have polname link to local subpage, and have some kind of ? icon that links to the external policy page? Or just a separate column - lots of horizontal space to spare.
+
+== Backend ==
+- filter/sort kwargs
+
+== Wild ideas / Nice-to-haves ==
+- have pages for individual RMs? Would give space to show more detailed stats, esp:
+  - all votes cast
+  - all policies cited 
+  - all involved pages, in case of a multimove
+- turn the activity stats (noms/closes/comments) in user view into a little bar graph
+  - and maybe some kind of viz for polcounts too
+- filtering by date range
+- sqlite backend
+- mimic Vector CSS
+- what about a 'current title' column?
+- css transitions!
 
 == Views ==
 RMs:
@@ -50,16 +68,3 @@ Other:
 - 'home'
 - about
 
-== Backend ==
-- filter/sort kwargs
-
-== Wild ideas / Nice-to-haves ==
-- have pages for individual RMs? Would give space to show more detailed stats, esp:
-  - all votes cast
-  - all policies cited 
-  - all involved pages, in case of a multimove
-- turn the activity stats (noms/closes/comments) in user view into a little bar graph
-  - and maybe some kind of viz for polcounts too
-- filtering by date range
-- sqlite backend
-- mimic Vector CSS

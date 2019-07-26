@@ -29,16 +29,8 @@ export function fetch_rms_for_policy(pol, n) {
 }
 
 export function fetch_rms(sortKey, n) {
-  const qargs = {n: n};
-  var endpoint;
-  if (sortKey === 'recent') {
-    endpoint = 'rms/recent';
-  } else if (sortKey === 'big') {
-    endpoint = 'rms/big';
-  } else {
-    console.error("Unrecognized sort key: " + sortKey);
-  }
-  return api(endpoint, qargs);
+  const qargs = {n: n, sort: sortKey};
+  return api('rms', qargs);
 }
 
 export function search_rms(query, n, case_sensitive) {

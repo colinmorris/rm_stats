@@ -2,7 +2,8 @@ import React from 'react';
 
 import './Row.css';
 
-import { RM_COLS } from './constants';
+import { RM_COLS, DEBUG } from './constants';
+import * as fields from './field_parsers';
 
 const RARROW = '→';
 class RMRow extends React.Component {
@@ -12,7 +13,7 @@ class RMRow extends React.Component {
   }
 
   renderCol(col) {
-    var meat;
+    var meat, classes = [col], extra_attrs = {};
     const dat = this.props.dat;
     switch (col) {
       case RM_COLS.RM:
@@ -23,7 +24,12 @@ class RMRow extends React.Component {
         meat = dat.close_date.split(' ')[0];
         break;
       case RM_COLS.outcome:
-        meat = dat.outcome;
+        const outcome = new fields.Outcome(dat.outcome);
+        meat = outcome.cleaned;
+        if (DEBUG) {
+          extra_attrs.title = dat.outcome;
+        }
+        classes.push('outcome-' + outcome.outcome);
         break;
       case RM_COLS.size:
         //meat = `${dat.n_participants-1} participants, ${dat.n_comments} comments`;
@@ -41,12 +47,15 @@ class RMRow extends React.Component {
       default:
         console.error("Unrecognized RM table heading: "+col);
     }
-    return meat;
+    return (<td key={col} className={classes.join(' ')}
+          {...extra_attrs}
+        >
+        {meat}
+        </td>);
   }
 
   render() {
-    var cells = this.props.headings.map(heading => {
-        return <td key={heading} className={heading}>{this.renderCol(heading)}</td>});
+    var cells = this.props.headings.map(this.renderCol.bind(this));
     return <tr>{cells}</tr>;
   }
 

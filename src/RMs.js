@@ -9,6 +9,7 @@ class RMs extends RMTable {
   sortKeys = new Map([
       ['big', 'Big'],
       ['recent', 'Recent'],
+      ['random', 'Random'],
   ]);
   get defaultSortKey() {
     return 'recent';

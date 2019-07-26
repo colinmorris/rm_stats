@@ -1,4 +1,6 @@
 
+export const DEBUG = true;
+
 export const RM_COLS = {
   RM: 'RM',
   date: 'Date',

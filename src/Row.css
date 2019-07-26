@@ -9,3 +9,19 @@ td.Participants, td.Date {
   text-align: center;
 }
 
+td.outcome-yes {
+  background-color: hsl(114, 66%, 86%);
+}
+
+td.outcome-no {
+  background-color: hsl(10, 100%, 92%);
+}
+
+td.outcome-nc {
+  background-color: hsl(52 , 82%, 87%);
+}
+
+/* My mind is fucking blown right now. */
+td.Outcome:first-letter {
+  text-transform: capitalize;
+}
