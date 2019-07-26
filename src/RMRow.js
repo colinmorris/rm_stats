@@ -13,12 +13,23 @@ class RMRow extends React.Component {
   }
 
   renderCol(col) {
-    var meat, classes = [col], extra_attrs = {};
+    var meat, extra_attrs = {};
+    // zz hack
+    var classes = [col.replace('!', '')];
     const dat = this.props.dat;
     switch (col) {
       case RM_COLS.RM:
-        meat = (<a href={this.rm_link}>
-            {dat.from_title} {RARROW} {dat.to_title}</a>);
+        meat = (<span>
+            <a href={this.rm_link}>
+            {dat.from_title} {RARROW} {dat.to_title || '?'}</a>
+            {dat.n_articles > 1 && 
+              <small className="multimove-indicator"
+                title={`This RM involved ${dat.n_articles} total renames`}>
+                +{dat.n_articles-1}
+              </small>
+            }
+            </span>
+            );
         break;
       case RM_COLS.date:
         meat = dat.close_date.split(' ')[0];
@@ -39,7 +50,19 @@ class RMRow extends React.Component {
         meat = dat.n_mentions;
         break;
       case RM_COLS.vote:
-        meat = `role: ${dat.role} / ${dat.vote}`;
+        classes.push('role-'+dat.role);
+        if (dat.role === 'nom') {
+          meat = 'Nominator';
+        } else if (dat.role === 'close') {
+          meat = 'Closer';
+        } else {
+          const vote = new fields.Vote(dat.vote);
+          meat = vote.cleaned;
+          classes.push('vote-' + vote.vote);
+          if (DEBUG) {
+            extra_attrs.title = dat.vote;
+          }
+        }
         break;
       case RM_COLS.comments:
         meat = dat.n_comments;

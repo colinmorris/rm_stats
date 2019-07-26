@@ -9,12 +9,28 @@ td.Participants, td.Date {
   text-align: center;
 }
 
-td.outcome-yes {
-  background-color: hsl(114, 66%, 86%);
+td.role-close, td.role-nom {
+  text-align: center;
 }
 
-td.outcome-no {
+td.outcome-yes, td.vote-supp {
+  background-color: hsl(114, 66%, 86%);
+}
+td.vote-strong-supp {
+  background-color: hsl(114, 66%, 81%);
+}
+td.vote-weak-supp {
+  background-color: hsl(114, 66%, 91%);
+}
+
+td.outcome-no, td.vote-opp {
   background-color: hsl(10, 100%, 92%);
+}
+td.vote-strong-opp {
+  background-color: hsl(10, 100%, 88%);
+}
+td.vote-weak-opp {
+  background-color: hsl(26, 100%, 95%);
 }
 
 td.outcome-nc {
@@ -24,4 +40,12 @@ td.outcome-nc {
 /* My mind is fucking blown right now. */
 td.Outcome:first-letter {
   text-transform: capitalize;
+}
+
+.multimove-indicator {
+  margin-left: 7px;
+}
+
+.role-nom, .role-close {
+  font-style: italic;
 }

@@ -8,19 +8,17 @@
 - filtering controls for user view (closer/commenter/nominator)
 - /About
 - figure out what to do with home url
-- gonna be a bug with random sort and show more
+- gonna be a bug with random sort and show more :/
+- biggest multimoves view?
 
 == Column display stuff ==
 - replace None with ? for to_title
-- add "(and x more)" to RM col for multimoves
-- clean up outcome col
-  - normalize case
-  - maybe linkify page names?
-  - remove [[link]] markup
 - color-code !Vote column in user view to show close/nom?
   - ooh, color code support/oppose !votes and moved/not moved cells
     in matching color scheme, to easy see rough agreement/disagreement.
 - in policies view, maybe have polname link to local subpage, and have some kind of ? icon that links to the external policy page? Or just a separate column - lots of horizontal space to spare.
+  - same thing with policies in user view
+  - ooh, title text with expansion of shortcut would be really nice!
 
 == Backend ==
 - filter/sort kwargs
@@ -37,6 +35,11 @@
 - mimic Vector CSS
 - what about a 'current title' column?
 - css transitions!
+- search within user view? that'd be a trip.
+- votecounts column would be cool
+- grey out close/nominated radios in user view if there are none to see
+- somehow merging shortcut aliases (e.g. WP:COMMONNAME | WP:UCRN)
+- make 'show more' a bit less jarring. Maybe a transition. Maybe a thick separating line between last batch and new batch.
 
 == Views ==
 RMs:

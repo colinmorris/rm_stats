@@ -31,5 +31,8 @@ th.RM, td.RM {
   max-width: 40em;
 }
 th.Outcome, td.Outcome {
-  max-width: 30em;
+  max-width: 27em;
+}
+th.Vote, td.Vote {
+  max-width: 27em;
 }

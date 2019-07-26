@@ -7,10 +7,29 @@ import { RM_COLS } from './constants';
 import PolCounts from './PolCounts';
 
 class UserRMsTable extends RMTable {
-  extra_headings = [RM_COLS.vote];
+  // Well this is an abuse of notation at the very least...
+  sortKeys = new Map([
+      ['close', 'Closed'],
+      ['nom', 'Nominated'],
+      ['vote', 'Participated'],
+      ['all', 'All'],
+  ]);
+
+  get headings() {
+    let extras  = [];
+    if (this.state.sortKey === 'vote' | this.state.sortKey === 'all') {
+      extras = [RM_COLS.vote];
+    }
+    return this.base_headings.concat(extras);
+  }
+
+  get defaultSortKey() {
+    return 'all';
+  }
 
   rows_api_call() {
-    return api.user_rms(this.props.username, this.state.n);
+    return api.user_rms(this.props.username, this.state.n, 
+        this.state.sortKey);
   }
 }
 
