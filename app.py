@@ -107,3 +107,6 @@ def stats_for_user():
       response=json.dumps(obj),
       mimetype='application/json',
       )
+
+if __name__ == '__main__':
+  app.run()
