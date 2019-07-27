@@ -1,15 +1,14 @@
-- /About
-- figure out what to do with home url
 - gonna be a bug with random sort and show more :/
 - look at payload size for API requests. if reasonable, consider prefetching like 200 results. semi-fixes this issue.
   - 50 rms: 5KB
   - 50 users: 1.3 KB
   - 1 active user: 5.5 KB
   - 50 policies: 1.5 KB
+  - so prefetching would not be unreasonable, but it'd require some non-trivial code changes in gnarly places
 - ooh, should search also search all the fromto titles in a multimove? Would be useful, but possibly confusing.
 - add GitHub link to header
 
-== Wild ideas / Nice-to-haves ==
+== Wild ideas ==
 - have pages for individual RMs? Would give space to show more detailed stats, esp:
   - all votes cast
   - all policies cited 
@@ -43,34 +42,3 @@
 
 == Backend ==
 - Not that it matters that much, but might be able to improve performance of some of pandas queries on the backend by using top_n rather than sort_values+head
-
-== Views ==
-RMs:
-x big RMs / recent RMs
-x user lookup
-  - !vote
-x RM search
-x policy lookup
-  - n mentions
-Columns for all:
-* RM
-* Date
-* outcome
-* (maybe) size
-Optional columns for all?:
-* policy mentions
-* all size cols (participants, comments, bytes)
-* nominator
-* closer
-* n_relists
-
-
-Users:
-x top users
-Policies:
-x top policies
-  - also maybe this could be a subview of the user lookup view?!
-Other:
-- 'home'
-- about
-
