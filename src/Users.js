@@ -1,6 +1,7 @@
 import React from 'react';
 
 import APITableMixin from './APITable';
+import UserSearchBar from './UserSearchBar';
 import * as api from './api_helpers';
 import * as disp from './display_helpers';
 
@@ -13,23 +14,12 @@ class Users extends APITableMixin {
     ['all', 'All'],
   ]);
 
-  constructor(props) {
-    super(props);
-    this.doLookup = this.doLookup.bind(this);
-  }
   get defaultSortKey() {
     return 'all';
   }
 
   rows_api_call() {
     return api.top_users(this.state.sortKey, this.state.n);
-  }
-
-  doLookup(evt) {
-    evt.preventDefault();
-    const query = document.getElementById("userlookup").value;
-    var loc = disp.user_link(query)
-    this.props.history.push(loc);
   }
 
   renderRow(row) {
@@ -48,10 +38,7 @@ class Users extends APITableMixin {
     return (
     <section>
       <h1>Users</h1>
-      <form>
-          <input id="userlookup" type="search" />
-        <button onClick={this.doLookup}>User lookup</button>
-      </form>
+      <UserSearchBar />
       <h2>Most active users</h2>
       {this.renderTable()}
     </section>

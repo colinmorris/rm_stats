@@ -1,4 +1,3 @@
-import React from 'react';
 
 const OUTCOMES = {
   moved: 'yes',
@@ -39,9 +38,9 @@ class Comment {
   get cleaned() {
     let norm = this.str;
     // Replace wikilinks with their visible text.
-    norm = norm.replace(/\[\[([^\|\]]+?)\]\]/g, '$1')
+    norm = norm.replace(/\[\[([^|\]]+?)\]\]/g, '$1')
     // piped wikilinks
-    norm = norm.replace(/\[\[[^\]\|]*\|([^\]]*)\]\]/g, '$1')
+    norm = norm.replace(/\[\[[^\]|]*\|([^\]]*)\]\]/g, '$1')
     norm = norm.replace(/^[']+/, '').replace(/['.;:]+$/, '');
     norm = norm.trim();
     return norm;

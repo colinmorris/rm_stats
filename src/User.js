@@ -5,6 +5,7 @@ import * as api from './api_helpers';
 import RMTable from './RMTable';
 import { RM_COLS } from './constants';
 import PolCounts from './PolCounts';
+import UserSearchBar from './UserSearchBar';
 
 class UserRMsTable extends RMTable {
   // Well this is an abuse of notation at the very least...
@@ -39,6 +40,7 @@ class User extends React.Component {
     this.state = {
       activity: {},
       polcounts: {},
+      loaded: false,
     };
   }
 
@@ -48,7 +50,10 @@ class User extends React.Component {
 
   fetchStats() {
     api.user_stats(this.username).then(dat => {
-      this.setState({activity: dat.activity, polcounts:dat.polcounts});
+      this.setState({activity: dat.activity, 
+        polcounts:dat.polcounts,
+        loaded: true,
+      });
     });
   }
 
@@ -57,6 +62,25 @@ class User extends React.Component {
   }
 
   render() {
+    if (!this.state.loaded) {
+      return <h1>RM stats for user {this.username}</h1>;
+    } else if (this.state.loaded && this.state.activity.all === 0) {
+      return this.render_nouser();
+    } else {
+      return this.render_extant();
+    }
+  }
+
+  render_nouser() {
+    return (
+      <section>
+        <h1>User {this.username} not found</h1>
+        <UserSearchBar />
+      </section>
+    );
+  }
+
+  render_extant() {
     const act = this.state.activity;
     return (
     <section>
