@@ -1,8 +1,11 @@
 - /About
 - figure out what to do with home url
 - gonna be a bug with random sort and show more :/
- - look at payload size for API requests. if reasonable, consider prefetching like
-    200 results. semi-fixes this issue.
+- look at payload size for API requests. if reasonable, consider prefetching like 200 results. semi-fixes this issue.
+  - 50 rms: 5KB
+  - 50 users: 1.3 KB
+  - 1 active user: 5.5 KB
+  - 50 policies: 1.5 KB
 
 == Wild ideas / Nice-to-haves ==
 - have pages for individual RMs? Would give space to show more detailed stats, esp:

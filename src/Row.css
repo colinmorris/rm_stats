@@ -1,4 +1,17 @@
 
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+tr {
+  animation: fadein 0.3s ease-in;
+}
+
 td.Participants, td.Date {
   text-align: center;
 }
