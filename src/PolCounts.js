@@ -36,17 +36,19 @@ class PolCounts extends React.Component {
           </li>);
     });
     var resizer = '';
+    const cls = "btn btn-primary btn-sm polcount-resizer";
     if (this.state.expanded) {
-      resizer = <button onClick={this.collapse}>-</button>;
+      resizer = <button className={cls} onClick={this.collapse} title="Less">-</button>;
     } else if (this.limit < Object.keys(this.props.counts).length) {
       lis = lis.slice(0, this.limit);
-      resizer = <button onClick={this.expand}>+</button>;
+      resizer = <button className={cls} onClick={this.expand} title="More">+</button>;
     }
     return (
       <div>
       <ul className="horiz">
         {lis}
-      </ul>{resizer}
+      {resizer}
+      </ul>
       </div>
       );
   }

@@ -6,11 +6,11 @@ import * as api from './api_helpers';
 import { RM_COLS } from './constants';
 
 class RMs extends RMTable {
-  sortKeys = new Map([
-      ['big', 'Big'],
-      ['recent', 'Recent'],
-      ['random', 'Random'],
-  ]);
+  sortKeys = [
+  {key: 'big', label:'Popular', title:'RMs with most comments'},
+  {key:'recent', label:'Recent'},
+  {key: 'random', label:'Random'},
+  ];
   get defaultSortKey() {
     return 'recent';
   }
@@ -34,7 +34,6 @@ class RMs extends RMTable {
       <>
         <h1>RMs</h1>
         <RMSearchBar />
-        <h2>{this.state.sortKey} RMs</h2>
         {this.renderTable()}
       </>
     );

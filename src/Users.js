@@ -7,12 +7,12 @@ import * as disp from './display_helpers';
 
 class Users extends APITableMixin {
   headings = ['User', 'Votes', 'Nominations', 'Closes', 'Total'];
-  sortKeys = new Map([
-    ['votes', '!Votes'],
-    ['noms', 'Nominations'],
-    ['closes', 'Closes'],
-    ['all', 'All'],
-  ]);
+  sortKeys = [
+    {key:'votes', label:'!Votes'},
+    {key:'noms', label:'Nominations'},
+    {key:'closes', label:'Closes'},
+    {key:'all', label:'All'},
+  ];
 
   get defaultSortKey() {
     return 'all';

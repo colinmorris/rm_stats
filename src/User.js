@@ -9,12 +9,12 @@ import UserSearchBar from './UserSearchBar';
 
 class UserRMsTable extends RMTable {
   // Well this is an abuse of notation at the very least...
-  sortKeys = new Map([
-      ['close', 'Closed'],
-      ['nom', 'Nominated'],
-      ['vote', 'Participated'],
-      ['all', 'All'],
-  ]);
+  sortKeys = [
+      {key: 'close', label:'Closed'},
+      {key: 'nom', label:'Nominated'},
+      {key: 'vote', label:'Participated'},
+      {key: 'all', label:'All'},
+  ];
 
   get headings() {
     let extras  = [];

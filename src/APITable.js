@@ -18,7 +18,11 @@ class APITableMixin extends React.Component {
   /* Mapping from identifier (used internally, and probably in API request)
      to text to use as label.
   */
-  sortKeys = new Map([]);
+  sortKeys = [
+    // key is used as value for the sortKey state variable
+    //{ label: 'Most floozles', key: 'floozle', 
+    //  title: 'Sort by floozles (not counting flozles)'}, ...
+  ];
   // If any of these state variables changes, our API results (this.state.rows)
   // are stale.
   apiSensitiveStateVars = ['n', 'sortKey'];
@@ -141,11 +145,11 @@ class APITableMixin extends React.Component {
   }
 
   renderSortControls() {
-    if (this.sortKeys.size === 0) {
+    if (this.sortKeys.length === 0) {
       return;
     }
-    const radios = Array.from(this.sortKeys).map( kv => {
-      const key=kv[0], label=kv[1];
+    const radios = this.sortKeys.map( sk => {
+      const key=sk.key, label=sk.label, title=sk.title;
       return (
       <div key={key} className="form-check form-check-inline">
         <input className="form-check-input" type="radio"
@@ -153,7 +157,9 @@ class APITableMixin extends React.Component {
           checked={this.state.sortKey===key}
           onChange={this.handleSortChange}
         />
-        <label className="form-check-label" htmlFor={'sortradio-'+key}>
+        <label className="form-check-label" htmlFor={'sortradio-'+key}
+          title={title}
+        >
           {label}
         </label>
       </div>

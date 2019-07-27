@@ -16,9 +16,10 @@ export default class UserSearchBar extends React.Component {
       return <Redirect to={disp.user_link(userquery)} />;
     }
     return (
-      <form>
+      <form className="searchform">
         <input id="userlookup" type="search" />
-        <button onClick={(evt) => {
+        <button className="btn-search"
+          onClick={(evt) => {
           evt.preventDefault();
           this.setState({redirect: true});
         }}>

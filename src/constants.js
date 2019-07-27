@@ -18,3 +18,6 @@ export const DEFAULT_RM_ROWS = DEFAULT_ROWS;
 // How many rows to add when clicking "show more"
 export const DEFAULT_ROWS_PLUS = 50;
 export const RM_ROW_PLUS = 50;
+
+export const GITHUB_SITE_URL = "https://github.com/PLACEHOLDER";
+export const GITHUB_SCRAPER_URL = "https://github.com/PLACEHOLDER";

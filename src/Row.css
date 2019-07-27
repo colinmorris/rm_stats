@@ -19,6 +19,9 @@ td.Participants, td.Date {
 td.role-close, td.role-nom {
   text-align: center;
 }
+td.role-vote {
+  font-weight: 450;
+}
 
 td.outcome-yes, td.vote-supp {
   background-color: hsl(114, 66%, 86%);
@@ -38,6 +41,12 @@ td.vote-strong-opp {
 }
 td.vote-weak-opp {
   background-color: hsl(26, 100%, 95%);
+}
+td.role-close {
+  background-color: #eee;
+}
+td.role-nom {
+  background-color: hsl(258, 100%, 93%);
 }
 
 td.outcome-nc {

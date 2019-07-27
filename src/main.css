@@ -36,3 +36,17 @@ th.Outcome, td.Outcome {
 th.Vote, td.Vote {
   max-width: 27em;
 }
+
+div.table-container {
+  display: inline-block;
+}
+
+.expander {
+  margin: 0 auto;
+  display: block;
+}
+
+.btn-search {
+  margin-left: .25rem;
+  margin-right: .75rem;
+}
