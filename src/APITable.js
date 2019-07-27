@@ -23,6 +23,15 @@ class APITableMixin extends React.Component {
   // are stale.
   apiSensitiveStateVars = ['n', 'sortKey'];
 
+  /* Seems like there's a bit of a design issue with the variables above (and
+  the checkboxes/defaultSortKey getters). The getters and 'class fields'
+  syntax above relate to setting *instance variables*. 
+  But semantically, they're more like class variables. But if I use the static
+  modifier when setting them, the subclass's version isn't visible in the base
+  class (APITableMixin) constructor, which is a big problem. Not sure what the 
+  cleaner solution would be. 'higher order components'? This new Hooks thing?
+  */
+
   constructor(props) {
     super(props);
     this.state = {
@@ -30,8 +39,31 @@ class APITableMixin extends React.Component {
       n : DEFAULT_ROWS,
       sortKey : this.defaultSortKey,
     };
+    for (let cb of this.checkboxes) {
+      this.state[cb.statevar] = cb.initialValue;
+      if (!cb.apiInsensitive) {
+        this.apiSensitiveStateVars.push(cb.statevar);
+      }
+    }
     this.onExpand = this.onExpand.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
+  }
+
+  get checkboxes() {
+    /* Similar to sortKeys above, but trying to make it a bit more generic this
+       time.
+    return [
+      {
+        label: 'Foozle', 
+        statevar: 'foo', // corresponding state var, i.e. this.state.foo
+        initialValue: true,
+        // default false. If explicitly set to true, then a change to this 
+        // variable should *not* force an API refetch.
+        apiInsensitive: true,
+      },
+    ];
+    */
+    return [];
   }
 
   // Need to implement as a getter rather than a class field so that subclass
@@ -75,6 +107,39 @@ class APITableMixin extends React.Component {
     console.error("Abstract method not implemented.");
   }
 
+  renderControls() {
+    return (<>
+        {this.renderSortControls()}
+        {this.renderCheckboxes()}
+        </>);
+  }
+
+  renderCheckboxes() {
+    if (this.checkboxes.length === 0) {
+      return;
+    }
+    const boxes = this.checkboxes.map( cb => {
+      const key=cb.statevar, label=cb.label;
+      return (
+      <div key={key} className="form-check form-check-inline">
+        <input className="form-check-input" type="checkbox"
+          value={key} id={'cb-'+key}
+          checked={this.state[key]}
+          onChange={(evt) => {
+            this.setState({[key]: evt.target.checked});
+          }}
+        />
+        <label className="form-check-label" htmlFor={'cb-'+key}>
+          {label}
+        </label>
+      </div>
+    )});
+
+    return (
+      <>{boxes}</>
+    );
+  }
+
   renderSortControls() {
     if (this.sortKeys.size === 0) {
       return;
@@ -103,7 +168,7 @@ class APITableMixin extends React.Component {
     const trs = this.state.rows.map( (row) => this.renderRow(row));
     return (
     <>
-      {this.renderSortControls()}
+      {this.renderControls()}
       <TableWrapper headings={this.headings} onExpand={this.onExpand}
         expandable={this.state.rows.length === this.state.n}
       >

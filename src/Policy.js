@@ -2,6 +2,7 @@ import React from 'react';
 
 import RMTable from './RMTable';
 import * as api from './api_helpers';
+import * as dp from './display_helpers';
 import { RM_COLS } from './constants';
 
 class Policy extends RMTable {
@@ -18,7 +19,9 @@ class Policy extends RMTable {
   render() {
     return (
       <section>
-        <h1>RM discussions invoking {this.polname}</h1>
+        <h1>
+        RM discussions invoking {dp.render_pol_wikilink(this.polname)}
+        </h1>
         {this.renderTable()}
       </section>
       );

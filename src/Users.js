@@ -26,10 +26,10 @@ class Users extends APITableMixin {
     return (
       <tr key={row.user}>
         <td>{disp.render_user(row.user)}</td>
-        <td>{row.votes}</td>
-        <td>{row.noms}</td>
-        <td>{row.closes}</td>
-        <td>{row.all}</td>
+        <td>{row.votes.toLocaleString()}</td>
+        <td>{row.noms.toLocaleString()}</td>
+        <td>{row.closes.toLocaleString()}</td>
+        <td>{row.all.toLocaleString()}</td>
       </tr>
       );
   }

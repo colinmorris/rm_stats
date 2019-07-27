@@ -70,6 +70,9 @@ class RMRow extends React.Component {
       default:
         console.error("Unrecognized RM table heading: "+col);
     }
+    if (typeof(meat) === 'number') {
+      meat = meat.toLocaleString();
+    }
     return (<td key={col} className={classes.join(' ')}
           {...extra_attrs}
         >

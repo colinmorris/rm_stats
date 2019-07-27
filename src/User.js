@@ -88,9 +88,9 @@ class User extends React.Component {
       <p>{this.username} has participated in {act.all} RMs:
       </p>
       <ul>
-        <li>{act.noms} nominations</li>
-        <li>{act.closes} closes</li>
-        <li>{act.votes} comments/!votes</li>
+        <li>{act.noms.toLocaleString()} nominations</li>
+        <li>{act.closes.toLocaleString()} closes</li>
+        <li>{act.votes.toLocaleString()} comments/!votes</li>
       </ul>
       <p>Their most cited policies are:</p>
       <PolCounts counts={this.state.polcounts} />

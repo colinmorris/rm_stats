@@ -51,6 +51,6 @@ export function user_rms(user, n, role) {
   return api('user/rms', {user: user, n: n, role: role});
 }
 
-export function fetch_top_policies(n) {
-  return api('policies', {n: n});
+export function fetch_top_policies(n, collapse) {
+  return api('policies', {n: n, collapse:collapse});
 }

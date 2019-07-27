@@ -1,20 +1,8 @@
 - /About
 - figure out what to do with home url
 - gonna be a bug with random sort and show more :/
-- biggest multimoves view?
-- some slightly fancy stuff with routing such that e.g. the radio buttons in /rms change the path?
-
-== Column display stuff ==
-- replace None with ? for to_title
-- color-code !Vote column in user view to show close/nom?
-  - ooh, color code support/oppose !votes and moved/not moved cells
-    in matching color scheme, to easy see rough agreement/disagreement.
-- in policies view, maybe have polname link to local subpage, and have some kind of ? icon that links to the external policy page? Or just a separate column - lots of horizontal space to spare.
-  - same thing with policies in user view
-  - ooh, title text with expansion of shortcut would be really nice!
-
-== Backend ==
-- filter/sort kwargs
+ - look at payload size for API requests. if reasonable, consider prefetching like
+    200 results. semi-fixes this issue.
 
 == Wild ideas / Nice-to-haves ==
 - have pages for individual RMs? Would give space to show more detailed stats, esp:
@@ -25,18 +13,31 @@
   - and maybe some kind of viz for polcounts too
 - filtering by date range
 - sqlite backend
-- mimic Vector CSS
 - what about a 'current title' column?
-- css transitions!
 - search within user view? that'd be a trip.
 - votecounts column would be cool
+- maybe merge the RMs and RM search views?
+- biggest multimoves view?
+- some slightly fancy stuff with routing such that e.g. the radio buttons in /rms change the path?
+- policy search?
+- redlinks for non-existent policy shortcuts?
+- in policy lookup view, show n mentions somewhere
+  - would also be nice to show aliases, maybe?
+
+== Visual nice-to-haves ==
+- in /policies Policy column, make anchor part of link a little smaller
+- theoretically would be kinda nice if users view sorting worked via clicking column headings rather than radio buttons
 - grey out close/nominated radios in user view if there are none to see
-- somehow merging shortcut aliases (e.g. WP:COMMONNAME | WP:UCRN)
 - make 'show more' a bit less jarring. Maybe a transition. Maybe a thick separating line between last batch and new batch.
 - 'advanced mode' controls
   - show misparsed RMs
   - show more/all columns
-- maybe merge the RMs and RM search views?
+- mimic Vector CSS
+- css transitions!
+- title text expansion of policy shortcuts in PolCounts (user view)
+
+== Backend ==
+- Not that it matters that much, but might be able to improve performance of some of pandas queries on the backend by using top_n rather than sort_values+head
 
 == Views ==
 RMs:

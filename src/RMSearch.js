@@ -13,9 +13,6 @@ import * as api from './api_helpers';
    Wonder what the approved way to do this is.
 */
 class RMSearch extends RMTable {
-  // nvm, keep case_sensitive as a pseudo (derived) property, and
-  // override shouldRefetchRows()
-  //apiSensitiveStateVars = ['n', 'sortKey', 'case_sensitive'];
 
   get qStringParams() {
     return new URLSearchParams(this.props.location.search);
