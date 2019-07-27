@@ -1,7 +1,8 @@
 import React from 'react';
 
 import RMRow from './RMRow';
-import { RM_COLS } from './constants';
+import { RM_COLS, DEBUG } from './constants';
+import { is_malparsed } from './field_parsers';
 import APITableMixin from './APITable';
 
 class RMTable extends APITableMixin {
@@ -16,6 +17,12 @@ class RMTable extends APITableMixin {
   }
 
   renderRow(dat) {
+    // Don't render badly misparsed RMs unless in debug mode.
+    // XXX: This could cause confusion in some cases. e.g. in the user lookup
+    // view, we could say this user participated in 5 RMs, but only show 4.
+    if (!DEBUG && is_malparsed(dat)) {
+      return;
+    }
     return <RMRow key={dat.rm_id} headings={this.headings} dat={dat} />;
   }
 }

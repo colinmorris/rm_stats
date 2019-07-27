@@ -1,3 +1,16 @@
+import { UNPARSEABLE_TITLE_PLACEHOLDER } from './constants';
+
+/* Return whether the given RM record has major parsing errors, such that we
+   probably shouldn't show it.
+*/
+export function is_malparsed(rm_record) {
+  if (rm_record.from_title === UNPARSEABLE_TITLE_PLACEHOLDER
+      || rm_record.outcome === null
+     ) {
+    return true;
+  }
+  return false;
+}
 
 const OUTCOMES = {
   moved: 'yes',

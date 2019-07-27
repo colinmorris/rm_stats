@@ -1,6 +1,8 @@
 
 export const DEBUG = true;
 
+export const UNPARSEABLE_TITLE_PLACEHOLDER = '*UNK';
+
 export const RM_COLS = {
   RM: 'RM',
   date: 'Date',
