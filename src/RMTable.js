@@ -23,7 +23,8 @@ class RMTable extends APITableMixin {
     if (!DEBUG && is_malparsed(dat)) {
       return;
     }
-    return <RMRow key={dat.rm_id} headings={this.headings} dat={dat} />;
+    const key = dat.rm_id + (dat.role ? dat.role : '');
+    return <RMRow key={key} headings={this.headings} dat={dat} />;
   }
 }
 

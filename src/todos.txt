@@ -1,12 +1,3 @@
-- figure out what to do with rows having major parsing errors (no fromto)
-  - also outcome=null, cf. field_parser.js constructor
-  - probably don't show them, unless in some kind of debugging/development mode
-  - maybe add some 'advanced mode' controls for this and other things?
-- maybe merge the RMs and RM search views?
-- return more semantic error codes for certain error conditions in backend
-  - e.g. 404 if we get a user lookup for a username that's not in the db?
-  - for a failed user lookup, show user lookup search bar
-- filtering controls for user view (closer/commenter/nominator)
 - /About
 - figure out what to do with home url
 - gonna be a bug with random sort and show more :/
@@ -42,6 +33,10 @@
 - grey out close/nominated radios in user view if there are none to see
 - somehow merging shortcut aliases (e.g. WP:COMMONNAME | WP:UCRN)
 - make 'show more' a bit less jarring. Maybe a transition. Maybe a thick separating line between last batch and new batch.
+- 'advanced mode' controls
+  - show misparsed RMs
+  - show more/all columns
+- maybe merge the RMs and RM search views?
 
 == Views ==
 RMs:
