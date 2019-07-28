@@ -22,4 +22,4 @@ export const RM_ROW_PLUS = 50;
 export const GITHUB_SITE_URL = "https://github.com/colinmorris/rm_stats";
 export const GITHUB_SCRAPER_URL = "https://github.com/PLACEHOLDER";
 
-export const BASEURL = DEBUG ? : '' : '/rmstats';
+export const BASEURL = DEBUG ? '' : '/rmstats';
