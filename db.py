@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 class PandasDB(object):
-  DEFAULT_BASEDIR = '../'
+  DEFAULT_BASEDIR = './datasets'
   DEFAULT_N = 20
   def __init__(self, basedir=None):
     if basedir is None:

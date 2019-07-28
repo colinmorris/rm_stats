@@ -1,11 +1,12 @@
 import flask
-from flask import request, json, abort
+from flask import request, json, abort, render_template, send_from_directory
+import os
 
 from db import PandasDB
 
 db = PandasDB()
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_folder="build/static")
 
 def get_n(default=15):
   if 'n' in request.args:
@@ -107,6 +108,16 @@ def stats_for_user():
       response=json.dumps(obj),
       mimetype='application/json',
       )
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+   path_dir = os.path.abspath("./build") #path react build
+   print(path)
+   if path != "" and os.path.exists(os.path.join(path_dir, path)):
+     return send_from_directory(os.path.join(path_dir), path)
+   else:
+     return send_from_directory(os.path.join(path_dir),'index.html')
 
 if __name__ == '__main__':
   app.run()
