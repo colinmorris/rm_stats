@@ -1,3 +1,4 @@
+import { BASEURL } from './constants';
 
 export function build_url(base, querystring_params) {
   // transform boolean values to 0/1
@@ -16,7 +17,7 @@ function api(endpoint, qargs) {
   if (!endpoint.startsWith('/')) {
     endpoint = '/' + endpoint;
   }
-  var urlstr = window.location.origin + '/api' + endpoint;
+  var urlstr = window.location.origin + BASEURL + '/api' + endpoint;
   const url = build_url(urlstr, qargs);
   var prom = window.fetch(url, {headers:{
       Accept: 'application/json'}})

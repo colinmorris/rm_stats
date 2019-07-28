@@ -10,6 +10,7 @@ import RMSearch from './RMSearch';
 import Users from './Users';
 import User from './User';
 import About from './About';
+import { BASEURL } from './constants';
 
 class NavHeader extends React.Component {
 
@@ -36,7 +37,7 @@ function App() {
   // Would like to have a 'Home' component with some kind of overall dashboard
   // or landing page. But I don't want to put in the work.
   return (
-    <Router>
+    <Router basename={BASEURL}>
     <NavHeader />
       <div className="main-content">
         <Route exact path="/" component={RMs} />
