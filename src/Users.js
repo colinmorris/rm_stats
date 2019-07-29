@@ -6,7 +6,7 @@ import * as api from './api_helpers';
 import * as disp from './display_helpers';
 
 class Users extends APITableMixin {
-  headings = ['User', 'Votes', 'Nominations', 'Closes', 'Total'];
+  headings = ['User', '!Votes', 'Nominations', 'Closes', 'Total'];
   sortKeys = [
     {key:'votes', label:'!Votes'},
     {key:'noms', label:'Nominations'},
