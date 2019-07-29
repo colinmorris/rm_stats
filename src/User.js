@@ -61,6 +61,16 @@ class User extends React.Component {
     this.fetchStats();
   }
 
+  // NB: If the route changes (as a result of activity in UserSearchBar), it doesn't
+  // necessarily mean a new User component gets mounted. More likely the same user
+  // component gets a change to its props.
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.params.username !== prevProps.match.params.username) {
+      this.setState({loaded: false});
+      this.fetchStats();
+    }
+  }
+
   render() {
     if (!this.state.loaded) {
       return <h1>RM stats for user {this.username}</h1>;
