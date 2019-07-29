@@ -112,10 +112,10 @@ class APITableMixin extends React.Component {
   }
 
   renderControls() {
-    return (<>
+    return (<form>
         {this.renderSortControls()}
         {this.renderCheckboxes()}
-        </>);
+        </form>);
   }
 
   renderCheckboxes() {
@@ -166,7 +166,7 @@ class APITableMixin extends React.Component {
     )});
 
     return (
-      <form>{radios}</form>
+      <>{radios}</>
     );
   }
 

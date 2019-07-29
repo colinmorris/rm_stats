@@ -39,6 +39,7 @@
 - mimic Vector CSS
 - css transitions!
 - title text expansion of policy shortcuts in PolCounts (user view)
+- add .active classes to nav items when appropriate
 
 == Backend ==
 - Not that it matters that much, but might be able to improve performance of some of pandas queries on the backend by using top_n rather than sort_values+head

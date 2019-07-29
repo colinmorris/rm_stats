@@ -8,6 +8,10 @@ db = PandasDB()
 
 app = flask.Flask(__name__, static_folder="build/static")
 
+# Check whether we're running on toolforge.
+if os.path.exists('/etc/wmflabs-project'):
+  app.config['APPLICATION_ROOT'] = '/rmstats'
+
 def get_n(default=15):
   if 'n' in request.args:
     return int(request.args['n'])

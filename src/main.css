@@ -50,3 +50,14 @@ div.table-container {
   margin-left: .25rem;
   margin-right: .75rem;
 }
+
+.octo:hover {
+  opacity: 1;
+}
+.octo {
+  opacity: .75;
+}
+.octo span {
+  font-size: 90%;
+  margin-left: -4px;
+}
