@@ -1,5 +1,7 @@
 
-export const DEBUG = true;
+export const PROD = process.env.NODE_ENV === 'production';
+export const BASEURL = PROD ? '/rmstats' : '';
+export const DEBUG = (!PROD) && true;
 
 export const UNPARSEABLE_TITLE_PLACEHOLDER = '*UNK';
 
@@ -21,6 +23,3 @@ export const RM_ROW_PLUS = 50;
 
 export const GITHUB_SITE_URL = "https://github.com/colinmorris/rm_stats";
 export const GITHUB_SCRAPER_URL = "https://github.com/PLACEHOLDER";
-
-export const PROD = process.env.NODE_ENV === 'production';
-export const BASEURL = PROD ? '/rmstats' : '';
