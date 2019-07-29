@@ -1,12 +1,12 @@
+- sort by relevance for Policy view
 - gonna be a bug with random sort and show more :/
-- look at payload size for API requests. if reasonable, consider prefetching like 200 results. semi-fixes this issue.
-  - 50 rms: 5KB
-  - 50 users: 1.3 KB
-  - 1 active user: 5.5 KB
-  - 50 policies: 1.5 KB
-  - so prefetching would not be unreasonable, but it'd require some non-trivial code changes in gnarly places
+  - look at payload size for API requests. if reasonable, consider prefetching like 200 results. semi-fixes this issue.
+    - 50 rms: 5KB
+    - 50 users: 1.3 KB
+    - 1 active user: 5.5 KB
+    - 50 policies: 1.5 KB
+    - so prefetching would not be unreasonable, but it'd require some non-trivial code changes in gnarly places
 - ooh, should search also search all the fromto titles in a multimove? Would be useful, but possibly confusing.
-- add GitHub link to header
 
 == Wild ideas ==
 - have pages for individual RMs? Would give space to show more detailed stats, esp:
@@ -16,30 +16,29 @@
 - turn the activity stats (noms/closes/comments) in user view into a little bar graph
   - and maybe some kind of viz for polcounts too
 - filtering by date range
-- sqlite backend
 - what about a 'current title' column?
 - search within user view? that'd be a trip.
 - votecounts column would be cool
 - maybe merge the RMs and RM search views?
 - biggest multimoves view?
 - some slightly fancy stuff with routing such that e.g. the radio buttons in /rms change the path?
-- policy search?
+- policy search? (with hypercomplete)
 - redlinks for non-existent policy shortcuts?
-- in policy lookup view, show n mentions somewhere
+- in policy lookup view, show total n mentions somewhere
   - would also be nice to show aliases, maybe?
 
 == Visual nice-to-haves ==
 - in /policies Policy column, make anchor part of link a little smaller
 - theoretically would be kinda nice if users view sorting worked via clicking column headings rather than radio buttons
 - grey out close/nominated radios in user view if there are none to see
-- make 'show more' a bit less jarring. Maybe a transition. Maybe a thick separating line between last batch and new batch.
 - 'advanced mode' controls
   - show misparsed RMs
   - show more/all columns
 - mimic Vector CSS
-- css transitions!
 - title text expansion of policy shortcuts in PolCounts (user view)
 - add .active classes to nav items when appropriate
 
 == Backend ==
 - Not that it matters that much, but might be able to improve performance of some of pandas queries on the backend by using top_n rather than sort_values+head
+- sqlite backend (though actually, pandas backend seems perfectly serviceable right now in terms of response time and memory usage)
+- Toolforge does have a redis thing that we could hook into (https://wikitech.wikimedia.org/wiki/Help:Toolforge#Redis). Theoretically, could be helpful for certain common queries (basically everything other than the search/lookup endpoints). But again, kind of a solution in search of a problem.
