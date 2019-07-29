@@ -1,27 +1,19 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+import { withRouter } from 'react-router';
 
 import * as disp from './display_helpers';
 
-export default class UserSearchBar extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {redirect:false};
-  }
+class UserSearchBar extends React.Component {
 
   render() {
-    if (this.state.redirect) {
-      const userquery = document.getElementById("userlookup").value;
-      return <Redirect to={disp.user_link(userquery)} />;
-    }
     return (
       <form className="searchform">
         <input id="userlookup" type="search" />
         <button className="btn-search"
           onClick={(evt) => {
           evt.preventDefault();
-          this.setState({redirect: true});
+          const userquery = document.getElementById("userlookup").value;
+          this.props.history.push(disp.user_link(userquery));
         }}>
           User lookup
         </button>
@@ -29,3 +21,5 @@ export default class UserSearchBar extends React.Component {
     );
   }
 }
+
+export default withRouter(UserSearchBar);
