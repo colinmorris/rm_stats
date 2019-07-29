@@ -2,7 +2,7 @@ A web app for visualizing stats related to [requested moves](https://en.wikipedi
 
 See the [wiki-controversial-titles](https://github.com/colinmorris/wiki-controversial-titles) repository for the code that scraped and parsed the data that gets visualized.
 
-This repo contains client code, written with React (using [create-react-app](https://github.com/facebook/create-react-app)), and a simple API backend written with Flask.
+This repo contains client code, written with React (using [create-react-app](https://github.com/facebook/create-react-app)), and a simple API backend written with Flask (`app.py`/`db.py`).
 
 ## Running in development mode
 
@@ -15,6 +15,8 @@ Pre-requisites:
 Start the API server: `python3 -m flask run`
 
 Start the js development server: `npm run start`
+
+In development, the development server [proxies](https://facebook.github.io/create-react-app/docs/proxying-api-requests-in-development) requests to the API server, per the `proxy` key in `package.json`.
 
 ## Running in production
 
