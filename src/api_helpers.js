@@ -25,8 +25,8 @@ function api(endpoint, qargs) {
   return prom;
 }
 
-export function fetch_rms_for_policy(pol, n) {
-  return api('policy/'+pol, {n:n});
+export function fetch_rms_for_policy(pol, n, sort) {
+  return api('policy/'+pol, {n, sort});
 }
 
 export function fetch_rms(sortKey, n) {

@@ -1,4 +1,3 @@
-- sort by relevance for Policy view
 - gonna be a bug with random sort and show more :/
   - look at payload size for API requests. if reasonable, consider prefetching like 200 results. semi-fixes this issue.
     - 50 rms: 5KB
@@ -7,6 +6,9 @@
     - 50 policies: 1.5 KB
     - so prefetching would not be unreasonable, but it'd require some non-trivial code changes in gnarly places
 - ooh, should search also search all the fromto titles in a multimove? Would be useful, but possibly confusing.
+- /pages list view and /pages/:page lookup view
+  - list view: pages sorted by number of RMs?
+  - lookup view: list all RMs for that page
 
 == Wild ideas ==
 - have pages for individual RMs? Would give space to show more detailed stats, esp:
@@ -25,7 +27,7 @@
 - policy search? (with hypercomplete)
 - redlinks for non-existent policy shortcuts?
 - in policy lookup view, show total n mentions somewhere
-  - would also be nice to show aliases, maybe?
+  - would also be nice to show aliases, maybe? (especially now that we're silently collapsing down to the canonical shortcut by default, for the purposes of this view)
 
 == Visual nice-to-haves ==
 - in /policies Policy column, make anchor part of link a little smaller
@@ -42,3 +44,4 @@
 - Not that it matters that much, but might be able to improve performance of some of pandas queries on the backend by using top_n rather than sort_values+head
 - sqlite backend (though actually, pandas backend seems perfectly serviceable right now in terms of response time and memory usage)
 - Toolforge does have a redis thing that we could hook into (https://wikitech.wikimedia.org/wiki/Help:Toolforge#Redis). Theoretically, could be helpful for certain common queries (basically everything other than the search/lookup endpoints). But again, kind of a solution in search of a problem.
+- unit tests of some sort?
