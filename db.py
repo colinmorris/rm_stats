@@ -36,6 +36,13 @@ class PandasDB(object):
     self.user_activity.columns = ['votes', 'noms', 'closes']
     self.user_activity['all'] = self.user_activity.sum(axis=1)
 
+    # Used in top_articles endpoint
+    ga = self.rms.groupby('article')
+    n_rms = ga.size()
+    n_comms = ga['n_comments'].sum()
+    self.articles = pd.concat([n_rms, n_comms], axis=1).reset_index()
+    self.articles.columns = ['article', 'rms', 'comments']
+
   def top_policies(self, n, collapse):
     if collapse:
       counts = self.scs.groupby(['canon', 'expanded'])['n'].sum()\
@@ -133,4 +140,20 @@ class PandasDB(object):
 
   def polcounts_for_user(self, user):
     return self.pols[self.pols.user == user].groupby('pol')['n'].sum()
+
+  def top_articles(self, sort, n):
+    assert sort in ('rms', 'comments'), sort
+    return self.articles.sort_values(by=sort, ascending=False).head(n)
+
+  @staticmethod
+  def decode_article(article):
+    return article.replace('_', ' ')
+
+  def rms_for_article(self, article, sort, n):
+    assert sort in ('recent', 'big'), sort
+    sortkey = {'recent': 'close_date', 'big': 'n_comments'}[sort]
+    dec = self.decode_article(article)
+    return self.rms[self.rms.article==dec]\
+        .sort_values(by=sortkey, ascending=False)\
+        .head(n)
 

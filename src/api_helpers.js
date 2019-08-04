@@ -13,7 +13,7 @@ export function build_url(base, querystring_params) {
   return base + (qs && '?') + qs;
 }
 
-function api(endpoint, qargs) {
+export function api(endpoint, qargs) {
   if (!endpoint.startsWith('/')) {
     endpoint = '/' + endpoint;
   }

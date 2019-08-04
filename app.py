@@ -111,6 +111,20 @@ def stats_for_user():
       mimetype='application/json',
       )
 
+@app.route('/api/articles')
+def top_articles():
+  n = get_n()
+  sortkey = request.args['sort']
+  df = db.top_articles(sortkey, n)
+  return df_response(df)
+
+@app.route('/api/articles/<string:article>')
+def rms_for_article(article):
+  n = get_n()
+  sortkey = request.args['sort']
+  df = db.rms_for_article(article, sortkey, n)
+  return df_response(df)
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
