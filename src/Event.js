@@ -16,7 +16,7 @@ export default class TimelineEvent extends React.Component {
       />
       <text
         x={this.props.cx-this.props.r}
-        y={this.props.cy+this.props.r*1.2}
+        y={this.props.cy+this.props.r+10}
         style={{fontSize: '9px'}}
       >
         {this.props.evt.to_title}
