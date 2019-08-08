@@ -3,6 +3,7 @@ import React from 'react';
 import TimelineEvent from './Event.js';
 import Connector from './Connector.js';
 import TimelineViewport from './Viewport';
+import TimelineLayoutArtist from './Artist';
 import { dummyTimeline } from './dummy_timeline.js';
 
 import './styles/timeline.css';
@@ -34,6 +35,10 @@ export default class Timeline extends React.Component {
     return 600;
   }
 
+  get height() {
+    return 300;
+  }
+
   get max_radius() {
     return this.base_radius;
   }
@@ -57,32 +62,29 @@ export default class Timeline extends React.Component {
   }
 
   render() {
+    const artist = new TimelineLayoutArtist();
     const timeline = this.props.timeline;
-    let next = {
-      x0: this.xmargin,
-      y: this.ymargin + this.max_radius,
-    };
     let eles = [];
     this.events.forEach( (evt, i) => {
-      let r = this.base_radius;
+      // PRECONDITION: there better be room on this line for the next event
+      let coords = artist.alloc_event(evt);
       // TODO: more robust keys
       eles.push(
         <TimelineEvent
           key={'evt-'+i}
-          evt={evt} r={r}
-          cx={next.x0+r} cy={next.y}
+          evt={evt}
           onEnter={() => this.focus(evt)}
+          {...coords}
         />);
-      next.x0 += r*2;
       if (i === this.events.length-1) { return; }
-      let snakelen = this.xscale_event_interval(timeline.days_after_evt(i));
+      let connector_coords = artist.alloc_connector(timeline.days_after_evt(i));
+      // if it would be out of bounds, move to the next line
       eles.push(
           <Connector 
             key={'connector-'+i}
-            x1={next.x0} y1={next.y} len={snakelen}
+            {...connector_coords}
           />
       );
-      next.x0 += snakelen;
     });
     return (
   <div className="Timeline">

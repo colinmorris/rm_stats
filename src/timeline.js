@@ -1,3 +1,7 @@
+function pseudo(seed) {
+  let x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
 
 export class timeline {
   constructor(evts) {
@@ -5,6 +9,6 @@ export class timeline {
   }
 
   days_after_evt(idx) {
-    return 60;
+    return (pseudo(idx)+.1) * 220;
   }
 }
