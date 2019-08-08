@@ -130,7 +130,7 @@ export default class TimelineLayoutArtist {
   }
 
   get max_radius() {
-    return this.base_radius;
+    return this.base_radius * 1.25;
   }
 
   get xmargin() {

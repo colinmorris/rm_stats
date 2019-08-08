@@ -93,7 +93,7 @@ export default class Timeline extends React.Component {
           <Connector 
             key={'connector-'+i}
             title_color={cmap.get(timeline.title_as_of(i))}
-            {...connector_coords}
+            coords={connector_coords}
           />
       );
     });

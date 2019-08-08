@@ -6,6 +6,7 @@ export default class TimelineEvent extends React.Component {
     return (
     <g
       onPointerEnter={ this.props.onEnter }
+      className="Event"
     >
       <circle
         cx={this.props.cx}
