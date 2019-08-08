@@ -1,4 +1,5 @@
 import React from 'react';
+import palette from 'google-palette';
 
 import TimelineEvent from './Event.js';
 import Connector from './Connector.js';
@@ -24,6 +25,14 @@ export default class Timeline extends React.Component {
       // focused event
       focused: null,
     };
+  }
+
+  get cmap() {
+    const titles = this.props.timeline.all_titles;
+    // Why doesn't the library include the octothorpes? I have no idea.
+    const colors = palette('tol', titles.length).map(hex => '#'+hex);
+    const tups = titles.map( (t, i) => [t, colors[i]] );
+    return new Map(tups);
   }
 
   get events() {
@@ -64,6 +73,7 @@ export default class Timeline extends React.Component {
   render() {
     const artist = new TimelineLayoutArtist();
     const timeline = this.props.timeline;
+    const cmap = this.cmap;
     let eles = [];
     this.events.forEach( (evt, i) => {
       // PRECONDITION: there better be room on this line for the next event
@@ -74,6 +84,7 @@ export default class Timeline extends React.Component {
           key={'evt-'+i}
           evt={evt}
           onEnter={() => this.focus(evt)}
+          title_color={cmap.get(evt.to_title)}
           {...coords}
         />);
       if (i === this.events.length-1) { return; }
@@ -81,6 +92,7 @@ export default class Timeline extends React.Component {
       eles.push(
           <Connector 
             key={'connector-'+i}
+            title_color={cmap.get(timeline.title_as_of(i))}
             {...connector_coords}
           />
       );

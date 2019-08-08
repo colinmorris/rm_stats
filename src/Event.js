@@ -11,7 +11,7 @@ export default class TimelineEvent extends React.Component {
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.props.r}
-        fill='#cac'
+        fill={this.props.title_color}
         stroke='black'
       />
       <text
