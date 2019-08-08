@@ -9,6 +9,7 @@ export default class TimelineEvent extends React.Component {
       className="Event"
     >
       <circle
+        className="Event-node"
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.props.r}

@@ -11,8 +11,8 @@ export default class TimelineLayoutArtist {
 
   /* Allocate space for given event, and return its coordinate info.
   */
-  alloc_event(evt) {
-    let r = this.base_radius;
+  alloc_event(evt, expanded) {
+    let r = expanded ? this.max_radius : this.base_radius;
     const coords = {
       cx: this.x+r*this.dir,
       cy: this.y,
@@ -26,10 +26,13 @@ export default class TimelineLayoutArtist {
     let snakelen = this.xscale_event_interval(dur);
     // as the bird flies
     if (this.has_room_to_grow(this.x+snakelen*this.dir)) {
+      // XXX: extending the connector under the node (up to the center) is a bit of 
+      // a hack around the fact that it seems like we can't transition line coords
+      // with css.
       const coords = {
-        x1: this.x,
+        x1: this.x - this.base_radius*this.dir,
         y1: this.y,
-        x2: this.x + (snakelen*this.dir),
+        x2: this.x + (snakelen*this.dir) + this.base_radius*this.dir,
         y2: this.y,
       };
       this.x += snakelen*this.dir;
@@ -63,7 +66,7 @@ export default class TimelineLayoutArtist {
     const next_y = this.y + this.lineheight;
     const x2 = furthest - bottom_handle*this.dir;
     const coords = {
-      x1: this.x,
+      x1: this.x - this.base_radius*this.dir,
       y1: this.y,
       top_hinge: {
         x: furthest,
@@ -73,7 +76,7 @@ export default class TimelineLayoutArtist {
         x: furthest,
         y: next_y,
       },
-      x2: x2,
+      x2: x2 - this.base_radius*this.dir,
       y2: next_y,
     };
     this.y = next_y;

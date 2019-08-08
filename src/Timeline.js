@@ -74,12 +74,13 @@ export default class Timeline extends React.Component {
     const artist = new TimelineLayoutArtist();
     const timeline = this.props.timeline;
     const cmap = this.cmap;
-    let eles = [];
+    let nodes = [], lines = [];
     this.events.forEach( (evt, i) => {
       // PRECONDITION: there better be room on this line for the next event
-      let coords = artist.alloc_event(evt);
+      let expanded = this.state.focused === evt;
+      let coords = artist.alloc_event(evt, expanded);
       // TODO: more robust keys
-      eles.push(
+      nodes.push(
         <TimelineEvent
           key={'evt-'+i}
           evt={evt}
@@ -89,7 +90,7 @@ export default class Timeline extends React.Component {
         />);
       if (i === this.events.length-1) { return; }
       let connector_coords = artist.alloc_connector(timeline.days_after_evt(i));
-      eles.push(
+      lines.push(
           <Connector 
             key={'connector-'+i}
             title_color={cmap.get(timeline.title_as_of(i))}
@@ -97,6 +98,8 @@ export default class Timeline extends React.Component {
           />
       );
     });
+    // Important that lines come before nodes - that's how we ensure that the
+    // nodes are drawn over top of the lines.
     return (
   <div className="Timeline">
     <svg
@@ -104,7 +107,8 @@ export default class Timeline extends React.Component {
       width={artist.width}
       height={artist.height}
     >
-      {eles}
+      {lines}
+      {nodes}
     </svg>
 
     <TimelineViewport

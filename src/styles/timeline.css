@@ -2,3 +2,14 @@
 svg.Timeline {
   background-color: #eee;
 }
+
+.Event-node {
+  transition-property: r, cx, cy;
+  transition-duration: 1s;
+}
+
+.Connector line {
+  /* xxx: this doesn't work :( */
+  transition-property: x1, x2, y1, y2;
+  transition-duration: 1s;
+}
