@@ -9,6 +9,12 @@
 - bug: PREDIRECT is not collapsing with PRIMARYREDIRECT. Issue with expansion sometimes using WP and sometimes using Wikipedia:. :/
 - Err: 'Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method. in RMs'.
   - I guess I should cancel any pending API calls in componentWillUnmount()?
+- in Articles view, add a column with a list of alternative titles considered?
+- list move history in Article view? That'd be sick.
+- reverse recency sort in article view? Seems more natural to want to read from oldest to newest in this context.
+- article search/lookup? (I guess RM search provides a similar ability)
+- include Article as column in RMTables, with link to /articles/ lookup page, if it has more than one RM? (and maybe a +n indicator, similar to multimoves?)
+  - except in the article lookup view itself
 
 == Wild ideas ==
 - have pages for individual RMs? Would give space to show more detailed stats, esp:
@@ -45,3 +51,10 @@
 - sqlite backend (though actually, pandas backend seems perfectly serviceable right now in terms of response time and memory usage)
 - Toolforge does have a redis thing that we could hook into (https://wikitech.wikimedia.org/wiki/Help:Toolforge#Redis). Theoretically, could be helpful for certain common queries (basically everything other than the search/lookup endpoints). But again, kind of a solution in search of a problem.
 - unit tests of some sort?
+
+== Scraping ==
+- Try to generally only take content between <!-- RM Top --> and bottom markers. (Unless there's a recognized template outside, such as for MRV, or RM/dated). Some cases where an RM was measured as much bigger than it was because it began inside an existing discussion thread.
+- https://en.wikipedia.org/wiki/Talk:Shooting_of_Trayvon_Martin/Archive_15#Witness_number_9_statement_released
+  - weird case where RM top and bottom templates were used for a survey that was clearly unrelated to any RM.
+- /articles/Yogurt
+  - we find only 3 RMs. According to oldmoves template at https://en.wikipedia.org/wiki/Talk:Yogurt, there should be 8. (Though probably at least 1 was informal)
