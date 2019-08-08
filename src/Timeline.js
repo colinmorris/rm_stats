@@ -78,7 +78,6 @@ export default class Timeline extends React.Component {
         />);
       if (i === this.events.length-1) { return; }
       let connector_coords = artist.alloc_connector(timeline.days_after_evt(i));
-      // if it would be out of bounds, move to the next line
       eles.push(
           <Connector 
             key={'connector-'+i}
@@ -90,7 +89,8 @@ export default class Timeline extends React.Component {
   <div className="Timeline">
     <svg
       className="Timeline"
-      width={this.width}
+      width={artist.width}
+      height={artist.height}
     >
       {eles}
     </svg>

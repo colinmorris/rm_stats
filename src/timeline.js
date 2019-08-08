@@ -9,6 +9,6 @@ export class timeline {
   }
 
   days_after_evt(idx) {
-    return (pseudo(idx)+.1) * 220;
+    return (pseudo(idx)+.1) * 320;
   }
 }
