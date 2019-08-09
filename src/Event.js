@@ -13,8 +13,8 @@ export default class TimelineEvent extends React.Component {
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.props.r}
-        fill={this.props.title_color}
-        stroke='black'
+        stroke={this.props.title_color}
+        fill='white'
       />
       <text
         x={this.props.cx-this.props.r}

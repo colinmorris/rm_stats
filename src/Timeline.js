@@ -1,5 +1,6 @@
 import React from 'react';
 import palette from 'google-palette';
+import Color from 'color';
 
 import TimelineEvent from './Event.js';
 import Connector from './Connector.js';
@@ -30,7 +31,12 @@ export default class Timeline extends React.Component {
   get cmap() {
     const titles = this.props.timeline.all_titles;
     // Why doesn't the library include the octothorpes? I have no idea.
-    const colors = palette('tol', titles.length).map(hex => '#'+hex);
+    let palname = 'mpn65'; // 'tol' has issues with brightness variability
+    let lighten = .6;
+    let desat = .3;
+    const colors = palette(palname, titles.length).map(hex => (
+      Color('#'+hex).lighten(lighten).desaturate(desat)
+    ));
     const tups = titles.map( (t, i) => [t, colors[i]] );
     return new Map(tups);
   }

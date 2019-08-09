@@ -6,10 +6,12 @@ svg.Timeline {
 .Event-node {
   transition-property: r, cx, cy;
   transition-duration: 1s;
+  stroke-width: 2px;
 }
 
 .Connector line {
   /* xxx: this doesn't work :( */
   transition-property: x1, x2, y1, y2;
   transition-duration: 1s;
+  stroke-width: 3px;
 }
