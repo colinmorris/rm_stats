@@ -15,3 +15,8 @@ svg.Timeline {
   transition-duration: 1s;
   stroke-width: 3px;
 }
+
+.Event text {
+  text-anchor: middle;
+}
+

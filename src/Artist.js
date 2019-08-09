@@ -96,7 +96,9 @@ export default class TimelineLayoutArtist {
 
   // How much room is left to grow on the current line
   get xroom() {
-    return this.xmax - this.x;
+    return this.dir === 1 ? 
+      this.xmax - this.x
+    : this.x - this.xmin;
   }
 
   has_room_to_grow(x) {
@@ -116,7 +118,7 @@ export default class TimelineLayoutArtist {
 
   get width() {
     // idk
-    return 800;
+    return window.innerWidth * .8;
   }
 
   get height() {
@@ -147,7 +149,7 @@ export default class TimelineLayoutArtist {
   }
 
   xscale_event_interval(days) {
-    return days * .6;
+    return days * 1.0;
   }
 
 }
