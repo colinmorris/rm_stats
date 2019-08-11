@@ -23,3 +23,18 @@ svg.Timeline {
 .Tick line {
   stroke: cyan;
 }
+
+.vote {
+  r: 2;
+  fill-opacity: .33;
+}
+
+.vote.opp {
+  fill: red;
+}
+.vote.supp {
+  fill: green;
+}
+.vote.other {
+  fill: grey;
+}

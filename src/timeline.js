@@ -1,4 +1,4 @@
-import { Outcome } from './field_parsers';
+//import { Outcome } from './field_parsers';
 
 function pseudo(seed) {
   let x = Math.sin(seed) * 10000;
@@ -7,8 +7,8 @@ function pseudo(seed) {
 
 export function timeline_from_rows(rows) {
   let evts = rows.map(row => ({
-    type: 'rm',
-    moved: new Outcome(row.outcome).outcome === 'yes',
+    //type: 'rm',
+    //moved: new Outcome(row.outcome).outcome === 'yes',
     closedate: new Date(row.close_date),
     ...row
     })
@@ -33,7 +33,6 @@ export class timeline {
     }
     let a = this.events[idx].closedate, b = this.events[idx+1].closedate;
     return (b-a) / (1000 * 60 * 60 * 24);
-    return (pseudo(idx)+.1) * 320;
   }
 
   // The article title as of the *end* of the ith event.

@@ -157,3 +157,31 @@ class PandasDB(object):
         .sort_values(by=sortkey, ascending=False)\
         .head(n)
 
+  def timeline_for_article(self, article):
+    dec = self.decode_article(article)
+    rms = self.rms[self.rms.article==dec].sort_values(by='close_date')
+    # TODO: add (pseudo) creation evt
+    evts = []
+    for _, row in rms.iterrows():
+      evts.append( self.rm_to_event(row) )
+    return evts
+
+  def rm_to_event(self, row):
+    d = row.to_dict()
+    d['type'] = 'rm'
+    oc = row.outcome.lower()
+    d['moved'] = 'moved' in oc and ('not' not in oc)
+    votes = self.votes[self.votes.rm_id == row.rm_id]
+    v = {'opp': 0, 'supp': 0, 'other': 0}
+    for vote in votes.vote.values:
+      if 'oppose' in str(vote).lower():
+        v['opp'] += 1
+      elif 'support' in str(vote).lower():
+        v['supp'] += 1
+      else:
+        v['other'] += 1
+    d['votes'] = v
+    return d
+
+
+
