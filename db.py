@@ -169,7 +169,9 @@ class PandasDB(object):
   def rm_to_event(self, row):
     d = row.to_dict()
     d['type'] = 'rm'
-    oc = row.outcome.lower()
+    # For some reason I'm sometimes getting float values for outcome/vote?
+    # should look into that...
+    oc = str(row.outcome).lower()
     d['moved'] = 'moved' in oc and ('not' not in oc)
     votes = self.votes[self.votes.rm_id == row.rm_id]
     v = {'opp': 0, 'supp': 0, 'other': 0}

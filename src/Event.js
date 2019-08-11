@@ -44,6 +44,7 @@ export default class TimelineEvent extends React.Component {
     const evt = this.props.evt;
     const votes = evt.votes;
     if (votes === undefined) {
+      // Actually this is expected in specifically the case of the creation evt.
       console.warn("votes was undefined");
       return;
     }
