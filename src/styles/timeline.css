@@ -43,3 +43,7 @@ svg.Timeline {
   font-size: small;
   font-family: monospace;
 }
+
+.prevnext a {
+  margin-right: 1em;
+}
