@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Tick from './Tick';
+
 export default class Connector extends React.Component {
 
   render_line(coords, color="gray") {
@@ -9,6 +11,41 @@ export default class Connector extends React.Component {
         stroke={color}
       />
     );
+  }
+  render_ticks() {
+    const a = this.props.src_event.closedate;
+    const b = this.props.dest_event.closedate;
+    if (a===undefined || b===undefined) {
+      console.warn(a);
+      return;
+    }
+    const delta  = b - a;
+    let ticks = [];
+    for (let yr = a.getFullYear()+1; yr <= b.getFullYear(); yr++) {
+      let newyears = new Date(yr, 0);
+      let frac = (newyears-a) / delta;
+      ticks.push( <Tick 
+          key={yr} label={yr}
+          {...this.xy_for_frac(frac)}
+          />
+      );
+    }
+    return ticks;
+  }
+  get hingey() {
+    return this.props.coords.top_hinge;
+  }
+  xy_for_frac(frac) {
+    if (!this.hingey) {
+      return {
+        x: this.props.coords.x1 + (this.props.coords.x2 - this.props.coords.x1)*frac,
+        y: this.props.coords.y1,
+      };
+    }
+    // XXX: I give up on this for now
+    return {x: this.props.coords.top_hinge.x, 
+      y: this.props.coords.top_hinge.y,
+    };
   }
   render_hinge() {
     const props = this.props.coords;
@@ -41,6 +78,7 @@ export default class Connector extends React.Component {
       className="Connector"
     >
       {lines}
+      {this.render_ticks()}
     </g>
     );
   }

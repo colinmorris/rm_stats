@@ -20,3 +20,6 @@ svg.Timeline {
   text-anchor: middle;
 }
 
+.Tick line {
+  stroke: cyan;
+}

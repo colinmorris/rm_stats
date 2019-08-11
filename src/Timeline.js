@@ -45,6 +45,7 @@ export default class Timeline extends React.Component {
     return this.props.timeline.events;
   }
 
+  // XXX: All these getters got moved to Artist class
   get width() {
     // idk
     return 600;
@@ -99,6 +100,8 @@ export default class Timeline extends React.Component {
       lines.push(
           <Connector 
             key={'connector-'+i}
+            src_event={evt}
+            dest_event={this.events[i+1]}
             title_color={cmap.get(timeline.title_as_of(i))}
             coords={connector_coords}
           />
