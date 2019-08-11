@@ -38,3 +38,8 @@ svg.Timeline {
 .vote.other {
   fill: grey;
 }
+
+.viewport .debug {
+  font-size: small;
+  font-family: monospace;
+}
