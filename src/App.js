@@ -18,6 +18,7 @@ import * as constants from './constants';
 
 import Timeline from './Timeline';
 import NthTimeline from './NthTimeline';
+import TimelineGroup from './Group';
 
 class NavHeader extends React.Component {
 
@@ -74,6 +75,7 @@ function App() {
 
         <Route exact path="/timeline" component={Timeline} />
         <Route path="/timeline/:ix" component={NthTimeline} />
+        <Route path="/timelines/:group" component={TimelineGroup} />
       </div>
     </Router>
   );

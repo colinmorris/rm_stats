@@ -139,6 +139,13 @@ def nth_timeline(n):
       response=simplejson.dumps(evts, ignore_nan=True),
       mimetype='application/json',
       )
+@app.route('/api/timeline/<string:article>')
+def article_timeline(article):
+  evts = db.timeline_for_article(article)
+  return app.response_class(
+      response=simplejson.dumps(evts, ignore_nan=True),
+      mimetype='application/json',
+      )
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
