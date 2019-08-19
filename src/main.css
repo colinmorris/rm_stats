@@ -61,3 +61,7 @@ div.table-container {
   font-size: 90%;
   margin-left: -4px;
 }
+
+.Tick text {
+  text-anchor: end;
+}

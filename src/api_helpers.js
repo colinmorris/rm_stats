@@ -17,9 +17,9 @@ export function api(endpoint, qargs) {
   if (!endpoint.startsWith('/')) {
     endpoint = '/' + endpoint;
   }
-  var urlstr = window.location.origin + BASEURL + '/api' + endpoint;
+  const urlstr = window.location.origin + BASEURL + '/api' + endpoint;
   const url = build_url(urlstr, qargs);
-  var prom = window.fetch(url, {headers:{
+  const prom = window.fetch(url, {headers:{
       Accept: 'application/json'}})
     .then(resp => resp.json());
   return prom;

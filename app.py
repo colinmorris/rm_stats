@@ -1,6 +1,7 @@
 import flask
 from flask import request, json, abort, render_template, send_from_directory
 import os
+import simplejson
 
 from db import PandasDB
 
@@ -25,9 +26,9 @@ def get_bool(qparam):
   assert val in ('0', '1'), val
   return val == '1'
 
-def df_response(df):
+def df_response(df, orient='records'):
   return app.response_class(
-      response=df.to_json(orient='records'),
+      response=df.to_json(orient=orient),
       mimetype='application/json',
       )
   
@@ -124,6 +125,27 @@ def rms_for_article(article):
   sortkey = request.args['sort']
   df = db.rms_for_article(article, sortkey, n)
   return df_response(df)
+
+@app.route('/api/timeline/<int:n>')
+def nth_timeline(n):
+  assert n > 0, n
+  topn = db.top_articles('rms', n)
+  article = topn.iloc[-1].article
+  #rms = db.rms_for_article(article, 'recent', 100)
+  #rms = rms[::-1]
+  #return df_response(rms)
+  evts = db.timeline_for_article(article)
+  return app.response_class(
+      response=simplejson.dumps(evts, ignore_nan=True),
+      mimetype='application/json',
+      )
+@app.route('/api/timeline/<string:article>')
+def article_timeline(article):
+  evts = db.timeline_for_article(article)
+  return app.response_class(
+      response=simplejson.dumps(evts, ignore_nan=True),
+      mimetype='application/json',
+      )
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

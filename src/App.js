@@ -16,6 +16,10 @@ import Article from './Article';
 import About from './About';
 import * as constants from './constants';
 
+import Timeline from './Timeline';
+import NthTimeline from './NthTimeline';
+import TimelineGroup from './Group';
+
 class NavHeader extends React.Component {
 
   render() {
@@ -33,6 +37,9 @@ class NavHeader extends React.Component {
 
           <li className="nav-item">
             <Link to="/about" className="nav-link">About</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/timeline" className="nav-link">Timeline (TEST)</Link>
           </li>
         </ul>
         <a title="rm_stats project on GitHub" className="octo"
@@ -65,6 +72,10 @@ function App() {
         <Route exact path="/articles" component={Articles} />
         <Route path="/articles/:article" component={Article} />
         <Route path="/about" component={About} />
+
+        <Route exact path="/timeline" component={Timeline} />
+        <Route path="/timeline/:ix" component={NthTimeline} />
+        <Route path="/timelines/:group" component={TimelineGroup} />
       </div>
     </Router>
   );

@@ -1,3 +1,4 @@
+- WP:CONSISTENCY probably shouldn't merge into WP:CRITERIA, even though they have the same target. Sometimes different shortcut names have different semiotics.
 - gonna be a bug with random sort and show more :/
   - look at payload size for API requests. if reasonable, consider prefetching like 200 results. semi-fixes this issue.
     - 50 rms: 5KB
@@ -56,5 +57,35 @@
 - Try to generally only take content between <!-- RM Top --> and bottom markers. (Unless there's a recognized template outside, such as for MRV, or RM/dated). Some cases where an RM was measured as much bigger than it was because it began inside an existing discussion thread.
 - https://en.wikipedia.org/wiki/Talk:Shooting_of_Trayvon_Martin/Archive_15#Witness_number_9_statement_released
   - weird case where RM top and bottom templates were used for a survey that was clearly unrelated to any RM.
-- /articles/Yogurt
-  - we find only 3 RMs. According to oldmoves template at https://en.wikipedia.org/wiki/Talk:Yogurt, there should be 8. (Though probably at least 1 was informal)
+
+=== False -ves ===
+Numberings below are generally according to oldmoves template on talk page.
+
+- /articles/Yogurt we find only 3 RMs. According to oldmoves template at https://en.wikipedia.org/wiki/Talk:Yogurt, there should be 8. (Though probably at least 1 was informal)
+  1. (2005) No RM/closing template, and never formally closed. Otherwise, followed basic pattern, and had heading "Requested move"
+  2. (2006) Close used <!-- Template:polltop -->. Also, closing comment went *above* main section heading. Otherwise roughly followed expected format.
+  3. (2006) Same as above. polltop, closing comment went above main heading.
+  4. (2007) polltop
+  5. (2009) Success. Occurred partway down in a discussion section (under a level-2 subheading), but otherwise seems well-formed.
+  6. (2009 - Jul 8) Used archive top, no RM-specific templates. But barely got off the ground anyways, and was quickly procedurally closed.
+  7/8: success
+- Compact disc. We find 2 out of... 7?
+  1. Used {{discussion top}} and did not resemble format of a traditional RM. No RARROW, no !votes.
+  2. (2009) Used polltop. No RARROW. Otherwise, standard voting/closing.
+  3. polltop. Otherwise standard.
+  4. Not an RM. Technical request thing.
+  5. Success
+  6. Success
+  7. (2013) polltop, otherwise standard.
+- Orange (colour). 0 out of ??? (depends how you count - at least 5 I guess)
+  1. (2005) no close template, no RARROW. but votes.
+  2. (2005) same
+  3. (2006) polltop, overflowed section header. Also one archive template ate up this and a subsequent RM in the next section.
+  4. see above
+  5. (Dec 2007) generic archive template, closing comment outside of archive, otherwise standard.
+- Star Trek into darkness
+  1. Dec 2011. Used polltop. Otherwise standard.
+  2/3. 2012 9/23, success
+  4. 1/09/2013 success
+  5. 1/30/2013 Malformed RM template. No template for close. Close comment placed at bottom ("Speedy closed").
+  6. Success(ish) but didn't get fromto properly.

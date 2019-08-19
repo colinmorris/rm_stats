@@ -1,0 +1,49 @@
+
+svg.Timeline {
+  background-color: #eee;
+}
+
+.Event-node {
+  transition-property: r, cx, cy;
+  transition-duration: 1s;
+  stroke-width: 2px;
+}
+
+.Connector line {
+  /* xxx: this doesn't work :( */
+  transition-property: x1, x2, y1, y2;
+  transition-duration: 1s;
+  stroke-width: 3px;
+}
+
+.Event text {
+  text-anchor: middle;
+}
+
+.Tick line {
+  stroke: cyan;
+}
+
+.vote {
+  r: 2;
+  fill-opacity: .33;
+}
+
+.vote.opp {
+  fill: red;
+}
+.vote.supp {
+  fill: green;
+}
+.vote.other {
+  fill: grey;
+}
+
+.viewport .debug {
+  font-size: small;
+  font-family: monospace;
+}
+
+.prevnext a {
+  margin-right: 1em;
+}
