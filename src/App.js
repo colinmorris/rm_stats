@@ -38,9 +38,6 @@ class NavHeader extends React.Component {
           <li className="nav-item">
             <Link to="/about" className="nav-link">About</Link>
           </li>
-          <li className="nav-item">
-            <Link to="/timeline" className="nav-link">Timeline (TEST)</Link>
-          </li>
         </ul>
         <a title="rm_stats project on GitHub" className="octo"
           href={constants.GITHUB_SITE_URL}
