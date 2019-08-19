@@ -134,22 +134,22 @@ export default class TimelineLayoutArtist {
     return this.max_radius*2 + this.line_ymargin;
   }
 
-  get max_radius() {
-    return this.base_radius * 1.25;
-  }
-
   get xmargin() {
     return 10;
   }
   get ymargin() {
     return 10;
   }
+
   get base_radius() {
-    return 20;
+    return 30;
+  }
+  get max_radius() {
+    return this.base_radius * 1.33;
   }
 
   xscale_event_interval(days) {
-    return days * 1.0;
+    return days * 1.2;
   }
 
 }

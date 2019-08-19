@@ -3,16 +3,32 @@ import os
 
 class PandasDB(object):
   DEFAULT_BASEDIR = './datasets'
+  INCLUDE_EXTRAS = 1
+
+  def load_csv(self, name):
+    fname = name + '.csv'
+    path = os.path.join(self.basedir, fname)
+    df = pd.read_csv(path)
+    if self.INCLUDE_EXTRAS:
+      path2 = os.path.join(self.basedir, 'extras', fname)
+      if os.path.exists(path2):
+        df2 = pd.read_csv(path2)
+        df = pd.concat([df, df2])
+      else:
+        assert name == 'shortcuts', name
+    return df
+
   def __init__(self, basedir=None):
     if basedir is None:
       basedir = self.DEFAULT_BASEDIR
+    self.basedir = basedir
     load = lambda name: pd.read_csv(os.path.join(basedir, name+'.csv'))
-    self.rms = load('rms')\
+    self.rms = self.load_csv('rms')\
         .rename(columns={'id': 'rm_id'})\
         .sort_values(by='close_date', ascending=False)
-    self.votes = load('votes')
-    self.pols = load('pols')
-    self.scs = load('shortcuts')
+    self.votes = self.load_csv('votes')
+    self.pols = self.load_csv('pols')
+    self.scs = self.load_csv('shortcuts')
 
     polcounts = self.pols.groupby(['rm_id', 'pol'])['n'].sum().reset_index()
     # Used in the rms_for_policy endpoint

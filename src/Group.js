@@ -11,6 +11,7 @@ const group_to_articles = {
     'Deadmau5',
 //    'Orange (colour)',
     'Compact disc',
+    'Star Trek Into Darkness',
   ]
 };
 

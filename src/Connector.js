@@ -42,10 +42,28 @@ export default class Connector extends React.Component {
         y: this.props.coords.y1,
       };
     }
-    // XXX: I give up on this for now
-    return {x: this.props.coords.top_hinge.x, 
-      y: this.props.coords.top_hinge.y,
-    };
+    // Hingey calculations :|
+    const dat = this.props.coords;
+    let deltas = [
+      (dat.top_hinge.x - dat.x1),
+      (dat.bottom_hinge.y - dat.top_hinge.y),
+      (dat.x2 - dat.bottom_hinge.x),
+    ];
+    let lens = deltas.map(Math.abs);
+    const A = lens[0], B = lens[1], C = lens[2];
+    const total = A + B + C;
+    const a = A/total, b = (A+B)/total;
+    let fracs = lens.map(len => len/total);
+    if (frac < a) {
+      const rel = frac / fracs[0];
+      return {x: dat.x1 + (deltas[0] * rel), y: dat.y1};
+    } else if (frac < b) {
+      const rel = (frac-a) / fracs[1];
+      return {x: dat.top_hinge.x, y: dat.top_hinge.y + (deltas[1]*rel) };
+    } else {
+      const rel = (frac-b)/fracs[2];
+      return {x: dat.bottom_hinge.x + (deltas[2] * rel), y: dat.y2};
+    }
   }
   render_hinge() {
     const props = this.props.coords;
