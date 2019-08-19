@@ -9,7 +9,8 @@ db = PandasDB()
 app = flask.Flask(__name__, static_folder="build/static")
 
 # Check whether we're running on toolforge.
-if os.path.exists('/etc/wmflabs-project'):
+PROD = os.path.exists('/etc/wmflabs-project')
+if PROD:
   app.config['APPLICATION_ROOT'] = '/rmstats'
 
 def get_n(default=15):
@@ -43,12 +44,9 @@ def policies():
 
 @app.route('/api/policy/<string:pol>')
 def policy(pol):
-  if 'n' in request.args:
-    n = int(request.args['n'])
-  else:
-    n = None
-  print("Getting {} rms for pol={!r}".format(n, pol))
-  dat = db.rms_for_policy(pol, n=n)
+  n = get_n()
+  sortkey = request.args['sort']
+  dat = db.rms_for_policy(pol, n, sortkey)
   return app.response_class(
       response=dat.to_json(orient='records'),
       mimetype='application/json',
@@ -113,6 +111,20 @@ def stats_for_user():
       mimetype='application/json',
       )
 
+@app.route('/api/articles')
+def top_articles():
+  n = get_n()
+  sortkey = request.args['sort']
+  df = db.top_articles(sortkey, n)
+  return df_response(df)
+
+@app.route('/api/articles/<string:article>')
+def rms_for_article(article):
+  n = get_n()
+  sortkey = request.args['sort']
+  df = db.rms_for_article(article, sortkey, n)
+  return df_response(df)
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
@@ -124,4 +136,4 @@ def serve(path):
      return send_from_directory(os.path.join(path_dir),'index.html')
 
 if __name__ == '__main__':
-  app.run()
+  app.run(debug=not PROD)

@@ -13,7 +13,7 @@ export function build_url(base, querystring_params) {
   return base + (qs && '?') + qs;
 }
 
-function api(endpoint, qargs) {
+export function api(endpoint, qargs) {
   if (!endpoint.startsWith('/')) {
     endpoint = '/' + endpoint;
   }
@@ -25,8 +25,8 @@ function api(endpoint, qargs) {
   return prom;
 }
 
-export function fetch_rms_for_policy(pol, n) {
-  return api('policy/'+pol, {n:n});
+export function fetch_rms_for_policy(pol, n, sort) {
+  return api('policy/'+pol, {n, sort});
 }
 
 export function fetch_rms(sortKey, n) {

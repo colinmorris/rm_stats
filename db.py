@@ -3,7 +3,6 @@ import os
 
 class PandasDB(object):
   DEFAULT_BASEDIR = './datasets'
-  DEFAULT_N = 20
   def __init__(self, basedir=None):
     if basedir is None:
       basedir = self.DEFAULT_BASEDIR
@@ -16,7 +15,16 @@ class PandasDB(object):
     self.scs = load('shortcuts')
 
     polcounts = self.pols.groupby(['rm_id', 'pol'])['n'].sum().reset_index()
+    # Used in the rms_for_policy endpoint
     self.pol_rms = polcounts.merge(self.rms, on='rm_id')
+    canons = pd.merge(self.pols, self.scs, 
+        on='pol',
+        suffixes=('', '_sc'),
+    )
+    canoncounts = canons.groupby(['rm_id', 'canon'])['n'].sum().reset_index()
+    self.canon_rms = canoncounts.merge(self.rms, on='rm_id')
+    for df in (self.pol_rms, self.canon_rms):
+      df['relevance'] = df['n'] / (df['n_comments']+4)
 
     user_to_ncloses = self.rms.groupby('closer').size()
     user_to_nnoms = self.rms.groupby('nominator').size()
@@ -27,6 +35,13 @@ class PandasDB(object):
     ).fillna(0)
     self.user_activity.columns = ['votes', 'noms', 'closes']
     self.user_activity['all'] = self.user_activity.sum(axis=1)
+
+    # Used in top_articles endpoint
+    ga = self.rms.groupby('article')
+    n_rms = ga.size()
+    n_comms = ga['n_comments'].sum()
+    self.articles = pd.concat([n_rms, n_comms], axis=1).reset_index()
+    self.articles.columns = ['article', 'rms', 'comments']
 
   def top_policies(self, n, collapse):
     if collapse:
@@ -43,11 +58,27 @@ class PandasDB(object):
     return user in self.user_activity.index
 
   # TODO: wrapper for translating returned df to something more digestible
-  def rms_for_policy(self, pol, n=None):
-    return self.pol_rms[self.pol_rms.pol==pol]\
-        .sort_values(by='close_date', ascending=False)\
+  def rms_for_policy(self, pol, n, sort, collapse=True):
+    assert sort in ('recent', 'big', 'mentions', 'relevance'), sort
+    if collapse:
+      canon = self.get_canon_shortcut(pol)
+      df = self.canon_rms[self.canon_rms.canon==canon]
+    else:
+      df = self.pol_rms[self.pol_rms.pol==pol]
+    if sort == 'recent':
+      df = df.sort_values(by='close_date', ascending=False)
+    elif sort == 'big':
+      df = df.sort_values(by='n_participants', ascending=False)
+    elif sort == 'mentions':
+      df = df.sort_values(by='n', ascending=False)
+    elif sort == 'relevance':
+      df = df.sort_values(by='relevance', ascending=False)
+    return df\
         .rename(columns={'n': 'n_mentions'})\
-        .head(n or self.DEFAULT_N)
+        .head(n)
+
+  def get_canon_shortcut(self, pol):
+    return self.scs[self.scs.pol==pol].iloc[0].canon
 
   def get_rms(self, sort, n):
     assert sort in ('big', 'recent', 'random'), sort
@@ -109,4 +140,20 @@ class PandasDB(object):
 
   def polcounts_for_user(self, user):
     return self.pols[self.pols.user == user].groupby('pol')['n'].sum()
+
+  def top_articles(self, sort, n):
+    assert sort in ('rms', 'comments'), sort
+    return self.articles.sort_values(by=sort, ascending=False).head(n)
+
+  @staticmethod
+  def decode_article(article):
+    return article.replace('_', ' ')
+
+  def rms_for_article(self, article, sort, n):
+    assert sort in ('recent', 'big'), sort
+    sortkey = {'recent': 'close_date', 'big': 'n_comments'}[sort]
+    dec = self.decode_article(article)
+    return self.rms[self.rms.article==dec]\
+        .sort_values(by=sortkey, ascending=False)\
+        .head(n)
 

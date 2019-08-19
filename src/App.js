@@ -11,6 +11,8 @@ import RMs from './RMs';
 import RMSearch from './RMSearch';
 import Users from './Users';
 import User from './User';
+import Articles from './Articles';
+import Article from './Article';
 import About from './About';
 import * as constants from './constants';
 
@@ -24,6 +26,9 @@ class NavHeader extends React.Component {
           <li className="nav-item"><Link to="/users" className="nav-link">Users</Link></li>
           <li className="nav-item">
             <Link to="/policies" className="nav-link">Policies</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/articles" className="nav-link">Articles</Link>
           </li>
 
           <li className="nav-item">
@@ -57,6 +62,8 @@ function App() {
         <Route path="/rms/search" component={RMSearch} />
         <Route exact path="/users" component={Users} />
         <Route path="/users/:username" component={User} />
+        <Route exact path="/articles" component={Articles} />
+        <Route path="/articles/:article" component={Article} />
         <Route path="/about" component={About} />
       </div>
     </Router>
